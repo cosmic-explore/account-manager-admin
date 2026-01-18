@@ -1,0 +1,26 @@
+services:
+  backend:
+    image: onthesafari/account-manager-backend
+    env_file:
+      - ".env"
+    build:
+      context: ./Backend
+    ports:
+      - "8888:5000"
+    volumes:
+      - ./Backend:/usr/src/app
+    depends_on:
+      - database
+  database:
+    image: "onthesafari/account-manager-postgres"
+    env_file:
+      - ".env"
+    build:
+      context: ./Database
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./Database/data:/var/lib/postgresql/data
+volumes:
+  database:
+    driver: local

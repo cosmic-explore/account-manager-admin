@@ -1,0 +1,14 @@
+# python and alembic
+.venv
+*.pyc
+__pycache__/
+Backend/alembic/README
+
+# database
+Database/data
+
+# vscode
+*.code-workspace
+
+# sensitive info
+.env
