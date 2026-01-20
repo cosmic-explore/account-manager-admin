@@ -12,3 +12,9 @@ class Resource(db.Model):
     account_id: Mapped[UUID] = mapped_column(ForeignKey("account.id"), nullable=False)
 
     account = relationship("Account")
+
+    def __init__(self, name, type, status, account_id):
+        self.name = name
+        self.type = type
+        self.status = status
+        self.account_id = account_id
