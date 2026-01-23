@@ -1,6 +1,7 @@
 flask-cors
 psycopg2-binary
 Flask-SQLAlchemy
+flask-bcrypt
 gunicorn
 gevent
 alembic

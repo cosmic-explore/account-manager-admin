@@ -4,9 +4,14 @@ logging.basicConfig(level=logging.DEBUG)
 
 import os
 from flask import Flask
+from flask_bcrypt import Bcrypt
 from classes.base import db
 
 app = Flask(__name__)
+
+# configure flask app
+app.secret_key = os.environ.get("FLASK_SECRET_KEY")
+bcrypt = Bcrypt(app)
 
 # configure sqlalchemy
 # docker adds "database" to the DNS
