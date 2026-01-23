@@ -12,4 +12,4 @@ class Activity(db.Model):
     resource_id: Mapped[UUID] = mapped_column(ForeignKey("resource.id"), nullable=False)
 
     person = relationship("Person")
-    resource = relationship("Resouce")
+    resource = relationship("Resource")
