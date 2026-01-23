@@ -4,19 +4,23 @@ logging.basicConfig(level=logging.DEBUG)
 
 import os
 from flask import Flask
-from flask_bcrypt import Bcrypt
+from extensions import bcrypt, login_manager
 from classes.base import db
+from routes.auth import auth_bp
 
 app = Flask(__name__)
 
-# configure flask app
+# flask config
 app.secret_key = os.environ.get("FLASK_SECRET_KEY")
-bcrypt = Bcrypt(app)
 
-# configure sqlalchemy
+# sqlalchemy config
 # docker adds "database" to the DNS
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI")
 db.init_app(app)
+
+# extension config
+login_manager.init_app(app)
+bcrypt.init_app(app)
 
 # configure cors
 # TODO: add env variable for frontend cors origin
@@ -24,6 +28,9 @@ db.init_app(app)
 # CORS(
 #     app, origins=[*os.environ.get("CORS_ORIGIN").split(",")], supports_credentials=True
 # )
+
+# register route endpoints
+app.register_blueprint(auth_bp)
 
 if __name__ == "__main__":
     # for running the app without guinicorn in development

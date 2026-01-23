@@ -1,4 +1,4 @@
-from app import bcrypt
+from extensions import bcrypt
 
 
 class Hasher:
