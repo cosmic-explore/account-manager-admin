@@ -36,12 +36,12 @@ def seed_tables():
     db.session.commit()
 
     test_resources = [
-        Resource("horses", "livestock", "active", test_accounts[0].id),
-        Resource("cows", "livestock", "active", test_accounts[0].id),
-        Resource("chickens", "livestock", "active", test_accounts[0].id),
-        Resource("apples", "produce", "active", test_accounts[1].id),
-        Resource("oranges", "produce", "active", test_accounts[1].id),
-        Resource("bananas", "produce", "active", test_accounts[1].id),
+        Resource("horses", "livestock", "active", 100, test_accounts[0].id),
+        Resource("cows", "livestock", "active", 100, test_accounts[0].id),
+        Resource("chickens", "livestock", "active", 100, test_accounts[0].id),
+        Resource("apples", "produce", "active", 100, test_accounts[1].id),
+        Resource("oranges", "produce", "active", 100, test_accounts[1].id),
+        Resource("bananas", "produce", "active", 100, test_accounts[1].id),
     ]
 
     for record in test_resources:
