@@ -5,7 +5,6 @@ from uuid import UUID
 
 
 class Activity(db.Model):
-    name: Mapped[str] = mapped_column(nullable=False, unique=True)
     action: Mapped[str] = mapped_column(nullable=False)
 
     person_id: Mapped[UUID] = mapped_column(ForeignKey("person.id"), nullable=False)
