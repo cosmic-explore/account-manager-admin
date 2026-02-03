@@ -1,4 +1,4 @@
-from sqlalchemy import UUID, text, DateTime, func
+from sqlalchemy import UUID, text, DateTime, func, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from flask_sqlalchemy import SQLAlchemy
 from uuid import uuid4, UUID
@@ -19,6 +19,14 @@ class Base(DeclarativeBase):
     modified_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), server_onupdate=func.now()
     )
+
+    @classmethod
+    def get_by_id(cls, id):
+        return db.session.scalars(select(cls).where(cls.id == id)).one_or_none()
+
+    @classmethod
+    def get_all(cls):
+        return db.session.scalars(select(cls)).all()
 
 
 db = SQLAlchemy(model_class=Base)
