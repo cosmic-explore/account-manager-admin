@@ -12,3 +12,8 @@ class Activity(db.Model):
 
     person = relationship("Person")
     resource = relationship("Resource")
+
+    def __init__(self, action, person_id, resource_id):
+        self.action = action
+        self.person_id = person_id
+        self.resource_id = resource_id
