@@ -6,7 +6,7 @@ import os
 from flask import Flask
 from extensions import bcrypt, login_manager
 from classes.base import db
-from routes.auth import auth_bp
+from routes import accounts_bp, activities_bp, auth_bp, persons_bp, resources_bp
 
 app = Flask(__name__)
 
@@ -14,7 +14,6 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY")
 
 # sqlalchemy config
-# docker adds "database" to the DNS
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URI")
 db.init_app(app)
 
@@ -30,7 +29,11 @@ bcrypt.init_app(app)
 # )
 
 # register route endpoints
+app.register_blueprint(accounts_bp)
+app.register_blueprint(activities_bp)
 app.register_blueprint(auth_bp)
+app.register_blueprint(persons_bp)
+app.register_blueprint(resources_bp)
 
 if __name__ == "__main__":
     # for running the app without guinicorn in development

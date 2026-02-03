@@ -12,10 +12,6 @@ from services.persons import validate_person
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 
-def load_person(person_id):
-    return Person.get_by_id(person_id)
-
-
 @auth_bp.route("/login", methods=["GET", "POST"])
 def login():
     if current_user.is_authenticated:
