@@ -1,4 +1,17 @@
 services:
+  frontend:
+    image: onthesafari/account-manager-frontend
+    build:
+      context: ./Frontend
+    environment:
+      - VITE_HOST_ROOT=http://127.0.0.1:8888
+    ports:
+      - "5173:5173"
+    volumes:
+    # don't copy the node_modules to prevent the volume hosted on windows from overwriting the linux packages on the container
+      - ./Frontend/src:/usr/src/app/src
+    depends_on:
+      - backend
   backend:
     image: onthesafari/account-manager-backend
     env_file:
