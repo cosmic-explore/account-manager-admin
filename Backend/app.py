@@ -4,6 +4,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 import os
 from flask import Flask
+from flask_cors import CORS
 from extensions import bcrypt, login_manager
 from classes.base import db
 from routes import accounts_bp, activities_bp, auth_bp, persons_bp, resources_bp
@@ -22,11 +23,9 @@ login_manager.init_app(app)
 bcrypt.init_app(app)
 
 # configure cors
-# TODO: add env variable for frontend cors origin
-# from flask_cors import CORS
-# CORS(
-#     app, origins=[*os.environ.get("CORS_ORIGIN").split(",")], supports_credentials=True
-# )
+CORS(
+    app, origins=[*os.environ.get("CORS_ORIGIN").split(",")], supports_credentials=True
+)
 
 # register route endpoints
 app.register_blueprint(accounts_bp)
