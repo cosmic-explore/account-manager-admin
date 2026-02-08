@@ -23,6 +23,8 @@ login_manager.init_app(app)
 bcrypt.init_app(app)
 
 # configure cors
+app.config["SESSION_COOKIE_SAMESITE"] = "None"  # Allow cross-origin cookies
+app.config["SESSION_COOKIE_SECURE"] = True
 CORS(
     app, origins=[*os.environ.get("CORS_ORIGIN").split(",")], supports_credentials=True
 )
