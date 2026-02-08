@@ -14,7 +14,10 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 @auth_bp.route("/login", methods=["POST"])
 def login():
     if current_user.is_authenticated:
-        return Response(status=418)
+        logging.info(
+            f"REPEATED LOGIN ATTEMPT FOR AUTHENTICATED USER {current_user.email}"
+        )
+        return Response(status=204)
 
     request_data = request.get_json()
 
