@@ -32,7 +32,13 @@ def get_accounts():
 @login_required
 def get_account_resources(id):
     resources = get_resources(id)
-    return jsonify([get_resource_dict(resource) for resource in resources])
+    account = get_account(id)
+    return jsonify(
+        {
+            "account": get_account_dict(account),
+            "resources": [get_resource_dict(resource) for resource in resources],
+        }
+    )
 
 
 @accounts_bp.route("", methods=["POST"])
