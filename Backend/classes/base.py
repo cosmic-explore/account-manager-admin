@@ -1,3 +1,4 @@
+import uuid
 from sqlalchemy import UUID, text, DateTime, func, select
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from flask_sqlalchemy import SQLAlchemy
@@ -22,6 +23,8 @@ class Base(DeclarativeBase):
 
     @classmethod
     def get_by_id(cls, id):
+        if isinstance(id, str):
+            id = uuid.UUID(id)
         return db.session.scalars(select(cls).where(cls.id == id)).one_or_none()
 
     @classmethod
