@@ -1,5 +1,5 @@
 import type { LoginInfo } from "../types/auth"
-import { buildGetRequest, buildPostRequest, HOST_ROOT } from "./config"
+import { buildGetRequest, buildPostRequest, HOST_ROOT } from "./util"
 
 export const requestLogin = async (submittedData: LoginInfo) => {
     const requestBody = JSON.stringify(submittedData)

@@ -1,5 +1,16 @@
 export const HOST_ROOT = `${import.meta.env.VITE_HOST_ROOT}`
 
+export const buildGetRequest = (): RequestInit => {
+    return {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        method: 'GET',
+        credentials: 'include'
+    }
+}
+
 export const buildPostRequest = (body: string): RequestInit => {
     return {
         headers: {
@@ -12,13 +23,14 @@ export const buildPostRequest = (body: string): RequestInit => {
     }
 }
 
-export const buildGetRequest = (): RequestInit => {
+export const buildPutRequest = (body: string): RequestInit => {
     return {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json'
         },
-        method: 'GET',
+        method: 'PUT',
+        body,
         credentials: 'include'
     }
 }
