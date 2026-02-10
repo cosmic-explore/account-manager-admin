@@ -12,10 +12,6 @@ def get_resource(id):
     return Resource.get_by_id(id)
 
 
-def get_resource_dict(resource):
-    return {"email": resource.email, "role": resource.role}
-
-
 def create_resource(name, type, status, quantity, account_id):
     resource = Resource(name, type, status, quantity, account_id)
     db.session.add(resource)
