@@ -19,7 +19,7 @@ def get_current_person():
     return jsonify(get_person_dict(current_user))
 
 
-@persons_bp.route("/", methods=["GET"])
+@persons_bp.route("", methods=["GET"])
 @login_required
 @admin_required
 def get_persons():
@@ -27,7 +27,7 @@ def get_persons():
     return jsonify([get_person_dict(person) for person in persons_list])
 
 
-@persons_bp.route("/", methods=["POST"])
+@persons_bp.route("", methods=["POST"])
 @login_required
 @admin_required
 def post_person():

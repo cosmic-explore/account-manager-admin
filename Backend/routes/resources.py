@@ -55,7 +55,7 @@ def log_activity(action):
 ### Routes
 
 
-@resources_bp.route("/", methods=["GET"])
+@resources_bp.route("", methods=["GET"])
 @login_required
 @admin_required
 def get_resources():
@@ -63,7 +63,7 @@ def get_resources():
     return jsonify([get_resource_dict(resource) for resource in resources_list])
 
 
-@resources_bp.route("/", methods=["POST"])
+@resources_bp.route("", methods=["POST"])
 @login_required
 @admin_required
 @log_activity("CREATE RESOURCE")

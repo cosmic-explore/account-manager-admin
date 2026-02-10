@@ -10,7 +10,7 @@ from services.activities import get_all_activities, get_activity_dict
 activities_bp = Blueprint("activities", __name__, url_prefix="/activities")
 
 
-@activities_bp.route("/", methods=["GET"])
+@activities_bp.route("", methods=["GET"])
 @login_required
 @admin_required
 def get_activities():

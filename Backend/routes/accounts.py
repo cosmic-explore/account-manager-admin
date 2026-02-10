@@ -21,9 +21,8 @@ ACCOUNT_MUTABLE_PROPERTIES = ["name", "status"]
 accounts_bp = Blueprint("accounts", __name__, url_prefix="/accounts")
 
 
-@accounts_bp.route("/", methods=["GET"])
+@accounts_bp.route("", methods=["GET"])
 @login_required
-@admin_required
 def get_accounts():
     accounts_list = get_all_accounts()
     return jsonify([get_account_dict(account) for account in accounts_list])
@@ -36,7 +35,7 @@ def get_account_resources(id):
     return jsonify([get_resource_dict(resource) for resource in resources])
 
 
-@accounts_bp.route("/", methods=["POST"])
+@accounts_bp.route("", methods=["POST"])
 @login_required
 @admin_required
 def post_account():
