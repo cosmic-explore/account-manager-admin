@@ -14,6 +14,7 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { requestAccountResources } from '../../api/accounts'
 import type { AccountInfo, ResourceInfo } from '../../types/accounts'
+import { ResourceTableRow } from './ResourceTableRow'
 
 export const AccountDetailPage = () => {
     const [account, setAccount] = useState<AccountInfo | null>(null)
@@ -54,16 +55,7 @@ export const AccountDetailPage = () => {
                             </TableHead>
                             <TableBody>
                                 {resources.map((resource: ResourceInfo) => {
-                                    return (
-                                        <TableRow key={resource.id}>
-                                            <TableCell>{resource.name}</TableCell>
-                                            <TableCell>{resource.type}</TableCell>
-                                            <TableCell>{resource.status}</TableCell>
-                                            <TableCell>{resource.quantity}</TableCell>
-                                            <TableCell>{resource.created}</TableCell>
-                                            <TableCell>{resource.modified}</TableCell>
-                                        </TableRow>
-                                    )
+                                    return <ResourceTableRow {...resource} />
                                 })}
                             </TableBody>
                         </Table>
