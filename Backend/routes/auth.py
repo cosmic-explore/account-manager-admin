@@ -36,10 +36,3 @@ def logout():
     logging.info(f"LOGOUT {current_user.email}")
     logout_user()
     return Response(status=204)
-
-
-@auth_bp.route("/me", methods=["GET"])
-@login_required
-def me():
-    user_data = {"email": current_user.email, "role": current_user.role}
-    return jsonify(user_data)

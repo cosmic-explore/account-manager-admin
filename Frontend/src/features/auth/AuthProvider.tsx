@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AuthContext, type LoginInfo, type UserStatus } from '../../types/auth'
-import { requestLogin, requestLogout, requestMe } from '../../api/auth'
+import { requestLogin, requestLogout } from '../../api/auth'
+import { requestMe } from '../../api/persons'
 import { CREDENTIALS_ERROR, GENERAL_ERROR } from '../../constants'
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
