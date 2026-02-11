@@ -1,18 +1,9 @@
-import {
-    Card,
-    CardContent,
-    Container,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    Typography,
-} from '@mui/material'
+import { Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import type { AccountInfo } from '../../types/accounts'
 import { AccountTableRow } from './AccountTableRow'
 import { requestAccounts } from '../../api/accounts'
+import { DefaultPage } from '../../layout/DefaultPage'
 
 export const AccountsPage = () => {
     const [accountList, setAccountList] = useState<AccountInfo[]>([])
@@ -22,25 +13,23 @@ export const AccountsPage = () => {
     }, [])
 
     return (
-        <Container sx={{ p: '2rem' }}>
-            <Card variant="outlined" sx={{ p: '2rem' }}>
-                <Typography variant="h4">Accounts</Typography>
-                <CardContent>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Status</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {accountList.map(account => (
-                                <AccountTableRow key={account.id} {...account} />
-                            ))}
-                        </TableBody>
-                    </Table>
-                </CardContent>
-            </Card>
-        </Container>
+        <DefaultPage>
+            <Typography variant="h4" sx={{ pb: '1rem' }}>
+                Accounts
+            </Typography>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Name</TableCell>
+                        <TableCell>Status</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {accountList.map(account => (
+                        <AccountTableRow key={account.id} {...account} />
+                    ))}
+                </TableBody>
+            </Table>
+        </DefaultPage>
     )
 }

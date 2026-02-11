@@ -1,6 +1,4 @@
 import {
-    Card,
-    CardContent,
     Table,
     TableHead,
     TableCell,
@@ -8,13 +6,13 @@ import {
     TableBody,
     TableRow,
     TableContainer,
-    Container,
 } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { requestAccountResources } from '../../api/accounts'
 import type { AccountInfo, ResourceInfo } from '../../types/accounts'
 import { ResourceTableRow } from './ResourceTableRow'
+import { DefaultPage } from '../../layout/DefaultPage'
 
 export const AccountDetailPage = () => {
     const [account, setAccount] = useState<AccountInfo | null>(null)
@@ -34,34 +32,30 @@ export const AccountDetailPage = () => {
     }, [id])
 
     return (
-        <Container sx={{ p: '2rem' }}>
-            <Card sx={{ p: '2rem' }}>
-                <Typography variant="h4">{account?.name}</Typography>
-                <CardContent>
-                    <Typography variant="h5" align="left">
-                        Resources
-                    </Typography>
-                    <TableContainer>
-                        <Table>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell>Name</TableCell>
-                                    <TableCell>Type</TableCell>
-                                    <TableCell>Status</TableCell>
-                                    <TableCell>Quantity</TableCell>
-                                    <TableCell>Created</TableCell>
-                                    <TableCell>Modified</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {resources.map((resource: ResourceInfo) => {
-                                    return <ResourceTableRow {...resource} />
-                                })}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </CardContent>
-            </Card>
-        </Container>
+        <DefaultPage>
+            <Typography variant="h4">{account?.name}</Typography>
+            <Typography variant="h5" align="left">
+                Resources
+            </Typography>
+            <TableContainer>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Type</TableCell>
+                            <TableCell>Status</TableCell>
+                            <TableCell>Quantity</TableCell>
+                            <TableCell>Created</TableCell>
+                            <TableCell>Modified</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {resources.map((resource: ResourceInfo) => {
+                            return <ResourceTableRow {...resource} />
+                        })}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </DefaultPage>
     )
 }
