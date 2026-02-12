@@ -6,7 +6,7 @@ export const AccountTableRow = (props: AccountInfo) => {
     return (
         <TableRow>
             <TableCell>
-                <Link to={`/accounts/${props.id}}`}>{props.name}</Link>
+                <Link to={`/accounts/${props.id}`}>{props.name}</Link>
             </TableCell>
             <TableCell>{props.status}</TableCell>
         </TableRow>
