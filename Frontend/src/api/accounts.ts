@@ -1,5 +1,5 @@
 import type { AccountUpdateData } from "../types/accounts"
-import { HOST_ROOT, buildGetRequest, buildPostRequest, buildPutRequest } from "./util"
+import { HOST_ROOT, buildGetRequest, buildUpdateRequest } from "./util"
 
 export const requestAccounts = async () => {
     const response = await fetch(`${HOST_ROOT}/accounts`, buildGetRequest())
@@ -13,12 +13,12 @@ export const requestAccountResources = async (accountId: string) => {
 
 export const requestCreateAccount = async (name: string, status: string) => {
     const requestBody = JSON.stringify({name, status})
-    const response = await fetch(`${HOST_ROOT}/accounts`, buildPostRequest(requestBody))
+    const response = await fetch(`${HOST_ROOT}/accounts`, buildUpdateRequest('POST', requestBody))
     return response.json()
 }
 
 export const requestUpdateAccount = async (accountId: string, updateData: AccountUpdateData) => {
     const requestBody = JSON.stringify(updateData)
-    const response = await fetch(`${HOST_ROOT}/accounts/${accountId}`, buildPutRequest(requestBody))
+    const response = await fetch(`${HOST_ROOT}/accounts/${accountId}`, buildUpdateRequest('PATCH', requestBody))
     return response.json()
 }

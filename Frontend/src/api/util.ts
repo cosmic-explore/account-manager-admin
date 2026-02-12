@@ -4,33 +4,21 @@ export const buildGetRequest = (): RequestInit => {
     return {
         headers: {
             Accept: 'application/json',
-            'Content-Type': 'application/json'
         },
         method: 'GET',
         credentials: 'include'
     }
 }
 
-export const buildPostRequest = (body: string): RequestInit => {
-    return {
+export const buildUpdateRequest = (method: string, body: string): RequestInit => {
+    const requestConfig = {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json'
         },
-        method: 'POST',
+        method: method,
         body,
         credentials: 'include'
     }
-}
-
-export const buildPutRequest = (body: string): RequestInit => {
-    return {
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-        },
-        method: 'PUT',
-        body,
-        credentials: 'include'
-    }
+    return requestConfig as RequestInit
 }
