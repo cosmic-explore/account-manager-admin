@@ -20,4 +20,4 @@ def create_person(email, role, password):
 
 
 def get_person_dict(person):
-    return {"email": person.email, "role": person.role}
+    return {"id": person.id, "email": person.email, "role": person.role}

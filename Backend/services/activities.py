@@ -18,6 +18,7 @@ def create_activity(action, person_id, resource_id):
 
 def get_activity_dict(activity):
     return {
+        "id": activity.id,
         "action": activity.action,
         "person": activity.person.email,
         "resource": activity.resource.name,
