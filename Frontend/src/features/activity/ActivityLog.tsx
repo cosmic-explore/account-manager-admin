@@ -8,7 +8,11 @@ export const ActivityLog = () => {
     const [activityList, setActivityList] = useState<ActivityInfo[]>([])
 
     useEffect(() => {
-        requestActivities().then(response => setActivityList(response))
+        requestActivities().then(response => {
+            const activities = response as ActivityInfo[]
+            activities.sort((a, b) => (new Date(a.timestamp) > new Date(b.timestamp) ? -1 : 1))
+            setActivityList(activities)
+        })
     }, [])
 
     return (
