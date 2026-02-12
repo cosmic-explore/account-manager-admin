@@ -22,5 +22,6 @@ def get_activity_dict(activity):
         "action": activity.action,
         "person": activity.person.email,
         "resource": activity.resource.name,
+        "resource_id": activity.resource_id,
         "timestamp": activity.created_at,
     }
