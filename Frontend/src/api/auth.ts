@@ -1,11 +1,11 @@
 import type { LoginInfo } from "../types/auth"
-import { buildPostRequest, HOST_ROOT } from "./util"
+import { buildUpdateRequest, HOST_ROOT } from "./util"
 
 export const requestLogin = async (submittedData: LoginInfo) => {
     const requestBody = JSON.stringify(submittedData)
-    return await fetch(`${HOST_ROOT}/auth/login`, buildPostRequest(requestBody))
+    return await fetch(`${HOST_ROOT}/auth/login`, buildUpdateRequest('POST', requestBody))
 }
 
 export const requestLogout = async () => {
-    return await fetch(`${HOST_ROOT}/auth/logout`, buildPostRequest(''))
+    return await fetch(`${HOST_ROOT}/auth/logout`, buildUpdateRequest('POST', ''))
 }
