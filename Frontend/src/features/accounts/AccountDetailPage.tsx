@@ -51,7 +51,7 @@ export const AccountDetailPage = () => {
                     </TableHead>
                     <TableBody>
                         {resources.map((resource: ResourceInfo) => {
-                            return <ResourceTableRow {...resource} />
+                            return <ResourceTableRow key={resource.id} {...resource} />
                         })}
                     </TableBody>
                 </Table>
