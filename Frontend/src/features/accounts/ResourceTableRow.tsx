@@ -3,7 +3,7 @@ import type { ResourceInfo } from '../../types/accounts'
 
 export const ResourceTableRow = (props: ResourceInfo) => {
     return (
-        <TableRow key={props.id}>
+        <TableRow>
             <TableCell>{props.name}</TableCell>
             <TableCell>{props.type}</TableCell>
             <TableCell>{props.status}</TableCell>
