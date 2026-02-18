@@ -24,8 +24,9 @@ export const AccountDetailPage = () => {
 
     useEffect(() => {
         requestAccountResources(accountId).then(response => {
+            const sortedResources = sortResources(response.resources)
             setAccount(response.account)
-            setResources(response.resources)
+            setResources(sortedResources)
         })
     }, [accountId])
 
@@ -36,6 +37,10 @@ export const AccountDetailPage = () => {
             editedRows.push(resourceId)
             setEditedRows([...editedRows])
         }
+    }
+
+    const sortResources = (resourceArray: ResourceInfo[]) => {
+        return resourceArray.sort((a, b) => (new Date(a.modified) > new Date(b.modified) ? -1 : 1))
     }
 
     const handleUpdateClick = async () => {
@@ -61,7 +66,8 @@ export const AccountDetailPage = () => {
         }
         requestAccountResources(accountId).then(response => {
             setEditedRows([])
-            setResources(response.resources)
+            const sortedResources = sortResources(response.resources)
+            setResources(sortedResources)
         })
     }
 
