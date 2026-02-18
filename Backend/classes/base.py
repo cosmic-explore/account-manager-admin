@@ -18,7 +18,10 @@ class Base(DeclarativeBase):
         DateTime(timezone=True), server_default=func.now()
     )
     modified_at: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), server_default=func.now(), server_onupdate=func.now()
+        DateTime(timezone=True),
+        server_default=func.now(),
+        server_onupdate=func.now(),
+        onupdate=func.now(),
     )
 
     @classmethod
