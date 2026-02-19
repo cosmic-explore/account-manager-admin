@@ -6,7 +6,7 @@ export const ActivitiesPage = () => {
     return (
         <DefaultPage>
             <Typography variant="h4" sx={{ pb: '1rem' }}>
-                System Activity
+                Platform Activity
             </Typography>
             <ActivityLog />
         </DefaultPage>
