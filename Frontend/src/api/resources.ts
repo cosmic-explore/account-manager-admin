@@ -1,10 +1,10 @@
-import { SERVER_ERROR } from '../constants'
 import type { ResourceCreateData, ResourceUpdateData } from '../types/resources'
-import { HOST_ROOT, buildUpdateRequest } from './util'
+import { HOST_ROOT, buildUpdateRequest, handleServerError } from './util'
 
 export const requestCreateResource = async (createData: ResourceCreateData) => {
     const requestBody = JSON.stringify(createData)
     const response = await fetch(`${HOST_ROOT}/resources`, buildUpdateRequest('POST', requestBody))
+    handleServerError(response, 'Error creating new resource')
     return response.json()
 }
 
@@ -14,9 +14,6 @@ export const requestUpdateResource = async (resourceId: string, updateData: Reso
         `${HOST_ROOT}/resources/${resourceId}`,
         buildUpdateRequest('PATCH', requestBody),
     )
-    if (!response.ok) {
-        throw new Error(SERVER_ERROR)
-    } else {
-        return response.json()
-    }
+    handleServerError(response, `Error updating resource ${resourceId}`)
+    return response.json()
 }

@@ -1,3 +1,5 @@
+import { SERVER_ERROR } from "../constants"
+
 export const HOST_ROOT = `${import.meta.env.VITE_HOST_ROOT}`
 
 export const buildGetRequest = (): RequestInit => {
@@ -21,4 +23,10 @@ export const buildUpdateRequest = (method: string, body: string): RequestInit =>
         credentials: 'include'
     }
     return requestConfig as RequestInit
+}
+
+export const handleServerError = (response: Response, message: string) => {
+    if (!response.ok) {
+        throw new Error(`${SERVER_ERROR}\n${message}: code ${response.status}`)
+    }
 }
