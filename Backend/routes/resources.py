@@ -94,5 +94,7 @@ def post_resource():
 @log_activity(UPDATE_RESOURCE)
 def patch_resource(id):
     resource = get_resource(id)
+    if resource is None:
+        return Response(status=404)
     update_resource(resource, request.get_json())
     return jsonify(get_resource_dict(resource))
