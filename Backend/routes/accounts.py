@@ -4,6 +4,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 from flask import request, Response, Blueprint, jsonify
 from flask_login import login_required
+from constants import HTTP_GET, HTTP_PATCH, HTTP_POST
 from services.auth import admin_required
 from services.accounts import (
     get_all_accounts,
@@ -21,14 +22,14 @@ ACCOUNT_MUTABLE_PROPERTIES = ["name", "status"]
 accounts_bp = Blueprint("accounts", __name__, url_prefix="/accounts")
 
 
-@accounts_bp.route("", methods=["GET"])
+@accounts_bp.route("", methods=[HTTP_GET])
 @login_required
 def get_accounts():
     accounts_list = get_all_accounts()
     return jsonify([get_account_dict(account) for account in accounts_list])
 
 
-@accounts_bp.route("/<id>/resources", methods=["GET"])
+@accounts_bp.route("/<id>/resources", methods=[HTTP_GET])
 @login_required
 def get_account_resources(id):
     resources = get_resources(id)
@@ -41,7 +42,7 @@ def get_account_resources(id):
     )
 
 
-@accounts_bp.route("", methods=["POST"])
+@accounts_bp.route("", methods=[HTTP_POST])
 @login_required
 @admin_required
 def post_account():
@@ -50,7 +51,7 @@ def post_account():
     return jsonify(get_account_dict(new_account))
 
 
-@accounts_bp.route("/<id>", methods=["PATCH"])
+@accounts_bp.route("/<id>", methods=[HTTP_PATCH])
 @login_required
 @admin_required
 def patch_account(id):
