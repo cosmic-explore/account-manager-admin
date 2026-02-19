@@ -21,5 +21,5 @@ export type ResourceCreateData = {
     type: string,
     status: string,
     quantity: number,
-    accountId: string
+    account_id: string
 }

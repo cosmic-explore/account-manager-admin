@@ -4,11 +4,11 @@ import { useParams } from 'react-router-dom'
 import { requestAccountResources } from '../../api/accounts'
 import type { AccountInfo } from '../../types/accounts'
 import { DefaultPage } from '../../layout/DefaultPage'
-import type { ResourceInfo } from '../../types/resources'
+import type { ResourceCreateData, ResourceInfo } from '../../types/resources'
 import { DataGrid } from '@mui/x-data-grid'
 import { handleResourceRowUpdate, resourceColumns } from './ResourceTableConfig'
-import { requestUpdateResource } from '../../api/resources'
-import { GENERAL_ERROR } from '../../constants'
+import { requestCreateResource, requestUpdateResource } from '../../api/resources'
+import { GENERAL_ERROR, NEW_ROW_ID, STATUS_ENUMS } from '../../constants'
 
 export const AccountDetailPage = () => {
     const [account, setAccount] = useState<AccountInfo | null>(null)
@@ -16,7 +16,8 @@ export const AccountDetailPage = () => {
     const [editedRows, setEditedRows] = useState<string[]>([])
     const [successNoteViz, setSuccessNoteViz] = useState<boolean>(false)
 
-    const isEdited = editedRows.length > 0
+    const isEdited: boolean = editedRows.length > 0
+    const isNewRow: boolean = resources.some(r => r.id === NEW_ROW_ID)
     const { id: accountId } = useParams()
     if (!accountId) {
         throw Error('Invalid Account ID')
@@ -46,29 +47,63 @@ export const AccountDetailPage = () => {
     const handleUpdateClick = async () => {
         let hasError = false
         for (const resourceId of editedRows) {
-            const resourceToUpdate = resources.find(resource => resource.id === resourceId)
-            if (!resourceToUpdate) {
+            const rowResource = resources.find(resource => resource.id === resourceId)
+            if (!rowResource) {
                 console.error(`Resource with id ${resourceId} not found when updating.`)
                 hasError = true
-                return
+                continue
             }
+            const { name, type, status, quantity } = rowResource
             try {
-                const { name, type, status, quantity } = resourceToUpdate
-                await requestUpdateResource(resourceId, { name, type, status, quantity })
-                setSuccessNoteViz(true)
-            } catch {
-                console.error(`Failed to update resource with id ${resourceId}.`)
+                if (resourceId === NEW_ROW_ID) {
+                    await requestCreateResource({
+                        name,
+                        type,
+                        status,
+                        quantity,
+                        account_id: accountId,
+                    })
+                } else {
+                    await requestUpdateResource(resourceId, { name, type, status, quantity })
+                }
+            } catch (e: unknown) {
+                if (e instanceof Error) {
+                    console.error(e.message)
+                } else {
+                    console.error(`An unknown error occurred for resource ${resourceId}.`)
+                }
                 hasError = true
             }
         }
         if (hasError) {
-            alert(`${GENERAL_ERROR}\nOne or more rows failed to update.`)
+            alert(`${GENERAL_ERROR}\nError creating/updating one or more rows.`)
+        } else {
+            setSuccessNoteViz(true)
         }
         requestAccountResources(accountId).then(response => {
             setEditedRows([])
             const sortedResources = sortResources(response.resources)
             setResources(sortedResources)
         })
+    }
+
+    const handleCreateRowClick = () => {
+        const newRow: ResourceInfo = {
+            id: NEW_ROW_ID,
+            account: account?.name || '',
+            name: '',
+            type: '',
+            status: STATUS_ENUMS[0],
+            quantity: 0,
+            created: '',
+            modified: '',
+        }
+        const resourcesUpdated = [...resources]
+        const editedRowsUpdated = [...editedRows]
+        resourcesUpdated.push(newRow)
+        editedRowsUpdated.push(newRow.id)
+        setResources(resourcesUpdated)
+        setEditedRows(editedRowsUpdated)
     }
 
     return (
@@ -92,14 +127,17 @@ export const AccountDetailPage = () => {
                 }
                 onProcessRowUpdateError={() => alert('actually an error')}
             />
-            <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-start', mt: 1 }}>
+                <Button disabled={!isEdited} variant="contained" onClick={handleUpdateClick}>
+                    Confirm Updates
+                </Button>
                 <Button
-                    disabled={!isEdited}
+                    disabled={isNewRow}
                     variant="contained"
-                    sx={{ mt: 1 }}
-                    onClick={handleUpdateClick}
+                    sx={{ ml: 1 }}
+                    onClick={handleCreateRowClick}
                 >
-                    Update
+                    Add Row
                 </Button>
             </Box>
             <Snackbar
