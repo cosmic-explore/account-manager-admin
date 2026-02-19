@@ -4,7 +4,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 import traceback
 from functools import wraps
-from flask import request, Blueprint, jsonify, g
+from flask import Response, request, Blueprint, jsonify, g
 from flask_login import login_required, current_user
 from constants import (
     CREATE_RESOURCE,
@@ -51,7 +51,8 @@ def log_activity(action):
         @wraps(func)
         def wrapper(*args, **kwargs):
             g.activity_action = action
-            g.resource_id = kwargs.get("id")
+            if action == UPDATE_RESOURCE:
+                g.resource_id = kwargs.get("id")
             return func(*args, **kwargs)
 
         return wrapper
@@ -83,6 +84,8 @@ def post_resource():
         request_data["quantity"],
         request_data["account_id"],
     )
+    # record the resource id for the activity log
+    g.resource_id = new_resource.id
     return jsonify(get_resource_dict(new_resource))
 
 
