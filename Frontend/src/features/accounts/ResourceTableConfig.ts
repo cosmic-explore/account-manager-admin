@@ -29,7 +29,7 @@ export const resourceColumns: GridColDef[] = [
         flex: 2,
         preProcessEditCellProps: (params: GridPreProcessEditCellProps) => {
             const value = Number(params.props.value)
-            const hasError = !Number.isInteger(value)
+            const hasError = !Number.isInteger(value) && value < 0
             return { ...params.props, error: hasError }
         },
     },
