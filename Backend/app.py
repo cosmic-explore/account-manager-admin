@@ -7,7 +7,14 @@ from flask import Flask
 from flask_cors import CORS
 from extensions import bcrypt, login_manager
 from classes.base import db
-from routes import accounts_bp, activities_bp, auth_bp, persons_bp, resources_bp
+from routes import (
+    accounts_bp,
+    activities_bp,
+    auth_bp,
+    persons_bp,
+    resources_bp,
+    dashboard_bp,
+)
 
 app = Flask(__name__)
 
@@ -35,6 +42,8 @@ app.register_blueprint(activities_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(persons_bp)
 app.register_blueprint(resources_bp)
+app.register_blueprint(dashboard_bp)
+
 
 if __name__ == "__main__":
     # for running the app without guinicorn in development
