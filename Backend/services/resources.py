@@ -33,6 +33,7 @@ def get_resource_dict(resource):
         "type": resource.type,
         "status": resource.status,
         "quantity": resource.quantity,
+        "account_id": resource.account.id,
         "account": resource.account.name,
         "created": resource.created_at,
         "modified": resource.modified_at,

@@ -5,6 +5,7 @@ export type ResourceInfo = {
     status: string,
     quantity: number,
     account: string,
+    account_id: string,
     created: string,
     modified: string
 }
