@@ -10,6 +10,7 @@ import { AccountDetailPage } from './features/accounts/AccountDetailPage'
 import { PersonsPage } from './features/persons/PersonsPage'
 import { AdminRequired } from './features/auth/AdminRequired'
 import { ActivitiesPage } from './features/activity/ActivityPage'
+import { DashboardPage } from './features/dashboard/DashboardPage'
 
 const theme = createTheme()
 theme.spacing(2)
@@ -22,7 +23,7 @@ function App() {
                 <Route path={'/login'} element={<LoginPage />} />
                 <Route element={<LoginRequired />}>
                     <Route element={<AppLayout />}>
-                        <Route path={'/dashboard'} element={<div>Dashboard</div>} />
+                        <Route path={'/dashboard'} element={<DashboardPage />} />
                         <Route path={'/accounts'} element={<AccountsPage />} />
                         <Route path={'/accounts/:id'} element={<AccountDetailPage />} />
                         <Route element={<AdminRequired />}>
