@@ -1,4 +1,4 @@
-import { Box, Button, Snackbar, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { requestAccountResources } from '../../api/accounts'
@@ -9,17 +9,21 @@ import { DataGrid } from '@mui/x-data-grid'
 import { handleResourceRowUpdate, resourceColumns } from './ResourceTableConfig'
 import { requestCreateResource, requestUpdateResource } from '../../api/resources'
 import { GENERAL_ERROR, NEW_ROW_ID, STATUS_ENUMS } from '../../constants'
+import { Toast } from '../ux-hints/Toast'
+import { useError } from '../ux-hints/ErrorProvider'
 
 export const AccountDetailPage = () => {
     const [account, setAccount] = useState<AccountInfo | null>(null)
     const [resources, setResources] = useState<ResourceInfo[]>([])
     const [editedRows, setEditedRows] = useState<string[]>([])
     const [successNoteViz, setSuccessNoteViz] = useState<boolean>(false)
+    const { showError } = useError()
 
     const isEdited: boolean = editedRows.length > 0
     const isNewRow: boolean = resources.some(r => r.id === NEW_ROW_ID)
     const { id: accountId } = useParams()
     if (!accountId) {
+        alert(GENERAL_ERROR)
         throw Error('Invalid Account ID')
     }
 
@@ -76,7 +80,7 @@ export const AccountDetailPage = () => {
             }
         }
         if (hasError) {
-            alert(`${GENERAL_ERROR}\nError creating/updating one or more rows.`)
+            showError('Failed to create or update one or more rows.')
         } else {
             setSuccessNoteViz(true)
         }
@@ -140,12 +144,11 @@ export const AccountDetailPage = () => {
                     Add Row
                 </Button>
             </Box>
-            <Snackbar
+            <Toast
                 open={successNoteViz}
-                onClose={() => setSuccessNoteViz(false)}
-                autoHideDuration={3000}
-                message="Update successful."
-                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                setOpen={setSuccessNoteViz}
+                message="update successful"
+                type="success"
             />
         </DefaultPage>
     )

@@ -4,13 +4,20 @@ import { requestPersons } from '../../api/persons'
 import { DefaultPage } from '../../layout/DefaultPage'
 import { Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material'
 import { PersonTableRow } from './PersonTableRow'
+import { useError } from '../ux-hints/ErrorProvider'
+import { SERVER_ERROR } from '../../constants'
 
 export const PersonsPage = () => {
-    /* NOTE: User is the frontend term for the backend Person */
+    // NOTE: User is the frontend term for the backend Person */
     const [personsList, setPersonsList] = useState<PersonInfo[]>([])
+    const { showError } = useError()
 
     useEffect(() => {
-        requestPersons().then(response => setPersonsList(response))
+        try {
+            requestPersons().then(response => setPersonsList(response))
+        } catch {
+            showError(SERVER_ERROR)
+        }
     }, [])
 
     return (

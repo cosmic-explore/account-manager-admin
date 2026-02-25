@@ -15,6 +15,8 @@ import { AdminOnlyWrapper } from '../../layout/AdminOnlyWrapper'
 import { AlertZone } from './AlertZone'
 import { TimeChart } from './TimeChart'
 import { DistributionChart } from './DistributionChart'
+import { SERVER_ERROR } from '../../constants'
+import { useError } from '../ux-hints/ErrorProvider'
 
 export const DashboardPage = () => {
     const [summary, setSummary] = useState<DashboardSummary>()
@@ -26,15 +28,20 @@ export const DashboardPage = () => {
         resources_no_quantity: [],
     })
     const [activities, setActivities] = useState<ActivityInfo[]>([])
+    const { showError } = useError()
 
     useEffect(() => {
-        requestDashboardData().then(dashboardData => {
-            setSummary(dashboardData.summary)
-            setAccountGrowth(dashboardData.account_growth)
-            setResourceDist(dashboardData.resource_distribution)
-            setAlerts(dashboardData.alerts)
-            setActivities(dashboardData.recent_activity)
-        })
+        try {
+            requestDashboardData().then(dashboardData => {
+                setSummary(dashboardData.summary)
+                setAccountGrowth(dashboardData.account_growth)
+                setResourceDist(dashboardData.resource_distribution)
+                setAlerts(dashboardData.alerts)
+                setActivities(dashboardData.recent_activity)
+            })
+        } catch {
+            showError(SERVER_ERROR)
+        }
     }, [])
 
     return (

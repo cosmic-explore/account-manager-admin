@@ -4,12 +4,19 @@ import type { AccountInfo } from '../../types/accounts'
 import { AccountTableRow } from './AccountTableRow'
 import { requestAccounts } from '../../api/accounts'
 import { DefaultPage } from '../../layout/DefaultPage'
+import { useError } from '../ux-hints/ErrorProvider'
+import { SERVER_ERROR } from '../../constants'
 
 export const AccountsPage = () => {
     const [accountList, setAccountList] = useState<AccountInfo[]>([])
+    const { showError } = useError()
 
     useEffect(() => {
-        requestAccounts().then(response => setAccountList(response))
+        try {
+            requestAccounts().then(response => setAccountList(response))
+        } catch {
+            showError(SERVER_ERROR)
+        }
     }, [])
 
     return (
