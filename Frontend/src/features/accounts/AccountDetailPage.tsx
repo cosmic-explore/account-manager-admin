@@ -91,6 +91,7 @@ export const AccountDetailPage = () => {
         const newRow: ResourceInfo = {
             id: NEW_ROW_ID,
             account: account?.name || '',
+            account_id: account?.id || '',
             name: '',
             type: '',
             status: STATUS_ENUMS[0],
