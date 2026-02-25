@@ -126,7 +126,6 @@ export const AccountDetailPage = () => {
                         setResources,
                     )
                 }
-                onProcessRowUpdateError={() => alert('actually an error')}
             />
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', mt: 1 }}>
                 <Button disabled={!isEdited} variant="contained" onClick={handleUpdateClick}>
