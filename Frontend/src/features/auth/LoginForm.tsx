@@ -1,6 +1,6 @@
 import { Box, Button, FormControl, Input, InputLabel, Typography } from '@mui/material'
 import { useState } from 'react'
-import { useAuth } from './UseAuth'
+import { useAuth } from './AuthProvider'
 import { CREDENTIALS_ERROR } from '../../constants'
 import { useNavigate } from 'react-router-dom'
 

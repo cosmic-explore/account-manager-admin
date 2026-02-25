@@ -1,8 +1,14 @@
-import { useEffect, useState } from 'react'
-import { AuthContext, type LoginInfo, type UserStatus } from '../../types/auth'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { type LoginInfo, type UserStatus } from '../../types/auth'
 import { requestLogin, requestLogout } from '../../api/auth'
 import { requestMe } from '../../api/persons'
 import { CREDENTIALS_ERROR, GENERAL_ERROR } from '../../constants'
+
+const AuthContext = createContext<{
+    userStatus: UserStatus
+    login: (submittedData: LoginInfo) => Promise<void>
+    logout: () => Promise<void>
+} | null>(null)
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const [userStatus, setUserStatus] = useState<UserStatus>({ user: null, loading: true })
@@ -52,4 +58,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             {children}
         </AuthContext.Provider>
     )
+}
+
+export const useAuth = () => {
+    const context = useContext(AuthContext)
+    if (!context) {
+        throw new Error('useAuth must be used inside AuthProvider')
+    }
+    return context
 }

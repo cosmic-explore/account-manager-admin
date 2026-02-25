@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useAuth } from './UseAuth'
+import { useAuth } from './AuthProvider'
 
 export const AdminRequired = () => {
     const { userStatus } = useAuth()

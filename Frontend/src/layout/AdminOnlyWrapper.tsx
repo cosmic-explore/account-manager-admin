@@ -1,4 +1,4 @@
-import { useAuth } from '../features/auth/UseAuth'
+import { useAuth } from '../features/auth/AuthProvider'
 
 export const AdminOnlyWrapper = ({ children }: { children: React.ReactNode }) => {
     const {

@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import { Navbar } from '../features/navigation/Navbar'
 import { Box, Button } from '@mui/material'
-import { useAuth } from '../features/auth/UseAuth'
+import { useAuth } from '../features/auth/AuthProvider'
 
 export const AppLayout = () => {
     const { logout } = useAuth()
