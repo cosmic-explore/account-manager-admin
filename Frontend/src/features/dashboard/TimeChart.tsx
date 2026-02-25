@@ -5,7 +5,8 @@ import { BarChart } from '@mui/x-charts'
 export const TimeChart = (props: { title: string; monthBuckets: MonthBucket[] }) => {
     const sortedMonths = props.monthBuckets
         .map(bucket => {
-            const date = new Date(bucket.year, bucket.month)
+            // subtract 1 from month because Date uses 0 index
+            const date = new Date(bucket.year, bucket.month - 1)
             return { x: date, y: bucket.count }
         })
         .sort((a, b) => (a > b ? 1 : -1))
