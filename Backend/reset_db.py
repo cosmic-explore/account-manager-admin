@@ -55,7 +55,7 @@ def seed_tables():
         Person("staff2@test.com", "staff", "p@ssword2", password_hasher),
         Person("staff3@test.com", "staff", "p@ssword3", password_hasher),
     ]
-    test_accounts = [Account(f"Account {i}", "active") for i in range(1, 10)]
+    test_accounts = [Account(f"Account {i}", "active") for i in range(1, 11)]
 
     # create a distrubution for account creation dates
     # always use the first of the month for simplicity
