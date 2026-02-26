@@ -1,6 +1,7 @@
 import { TableCell, TableRow } from '@mui/material'
 import type { ActivityInfo } from '../../types/activities'
 import { Link } from 'react-router'
+import { formatDateString } from '../../utils/string-formatting'
 
 export const ActivityTableRow = (props: ActivityInfo) => {
     return (
@@ -11,7 +12,7 @@ export const ActivityTableRow = (props: ActivityInfo) => {
                 <Link to={`/accounts/${props.account_id}`}>{props.account_name}</Link>
             </TableCell>
             <TableCell>{props.person}</TableCell>
-            <TableCell>{props.timestamp}</TableCell>
+            <TableCell>{formatDateString(props.timestamp)}</TableCell>
         </TableRow>
     )
 }
