@@ -33,7 +33,7 @@ def month_minus_n(year, month_num, n):
         return year, month_num - n
 
 
-month_dist_table = [0, 0, 0, 1, 2, 2, 3, 5, 7, 10]
+month_dist_table = [10, 7, 5, 3, 2, 2, 1, 0, 0, 0]
 
 resource_archtypes = [
     {"name": "Storage", "type": "tech", "quantity": 1000, "unit": "GB"},
@@ -69,6 +69,10 @@ def seed_tables():
             date(year, month, 1),
         )
 
+    # set some accounts to "suspended"
+    for i in [3, 7]:
+        test_accounts[i].status = "suspended"
+
     # commit records with no foreign keys
     for record in [*test_persons, *test_accounts]:
         db.session.add(record)
@@ -91,6 +95,21 @@ def seed_tables():
             )
         test_resources.extend(account_resources)
 
+    # mess with resources to produce interesting analytics
+
+    no_resouces_account_id = test_accounts[4].id
+    test_resources = [
+        r for r in test_resources if r.account_id != no_resouces_account_id
+    ]
+
+    for i in [14, 15, 37]:
+        test_resources[i].quantity = 0
+
+    stale_resources_account_id = test_accounts[2].id
+    for r in [r for r in test_resources if r.account_id == stale_resources_account_id]:
+        set_create_date(r, test_accounts[2].created_at)
+
+    # add resources to the db
     for record in test_resources:
         db.session.add(record)
     db.session.commit()
