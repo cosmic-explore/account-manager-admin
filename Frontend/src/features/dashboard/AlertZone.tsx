@@ -1,4 +1,14 @@
-import { Box, Card, CardContent, TableCell, TableRow, Typography } from '@mui/material'
+import {
+    Box,
+    Card,
+    CardContent,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Typography,
+} from '@mui/material'
 import { Link } from 'react-router'
 import type { DashboardAlerts } from '../../types/dashboard'
 import type { ResourceInfo } from '../../types/resources'
@@ -9,7 +19,7 @@ export const AlertZone = (props: { alerts: DashboardAlerts }) => {
     return (
         <Box>
             <Typography variant="h5">Needs Attention</Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
                 <AlertList title="Accounts with Stale Resources">
                     {props.alerts?.accounts_stale_resources.map(account => (
                         <AccountLink key={account.id} account={account} />
@@ -39,12 +49,16 @@ const AlertList = (props: { title: string; children: ReactNode }) => {
     return (
         <Card>
             <CardContent>
-                <TableRow>
-                    <TableCell>
-                        <Typography fontWeight="bold">{props.title}</Typography>
-                    </TableCell>
-                </TableRow>
-                {props.children}
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>
+                                <Typography fontWeight="bold">{props.title}</Typography>
+                            </TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>{props.children}</TableBody>
+                </Table>
             </CardContent>
         </Card>
     )
