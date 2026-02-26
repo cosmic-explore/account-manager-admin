@@ -23,5 +23,7 @@ def get_activity_dict(activity):
         "person": activity.person.email,
         "resource": activity.resource.name,
         "resource_id": activity.resource_id,
+        "account_id": activity.resource.account_id,
+        "account_name": activity.resource.account.name,
         "timestamp": activity.created_at,
     }

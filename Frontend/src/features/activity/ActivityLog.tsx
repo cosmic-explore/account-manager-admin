@@ -9,6 +9,7 @@ export const ActivityLog = (props: { activityList: ActivityInfo[] }) => {
                 <TableRow>
                     <TableCell>Action</TableCell>
                     <TableCell>Resource</TableCell>
+                    <TableCell>Account</TableCell>
                     <TableCell>User</TableCell>
                     <TableCell>Timestamp</TableCell>
                 </TableRow>
