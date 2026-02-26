@@ -5,7 +5,7 @@ from uuid import UUID
 
 
 class Resource(db.Model):
-    name: Mapped[str] = mapped_column(nullable=False, unique=True)
+    name: Mapped[str] = mapped_column(nullable=False)
     type: Mapped[str] = mapped_column(nullable=False)
     status: Mapped[str] = mapped_column(nullable=False)
     quantity: Mapped[int] = mapped_column(nullable=False)
