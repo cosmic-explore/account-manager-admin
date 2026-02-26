@@ -57,8 +57,8 @@ export const DashboardPage = () => {
                         <KpiCard title="New Accounts" value={summary?.new_accounts} />
                         <KpiCard title="Total Resources" value={summary?.total_resources} />
                         <KpiCard
-                            title="Total Resource Quantity"
-                            value={summary?.total_resource_quantity}
+                            title="Total Storage Allocated (GB)"
+                            value={summary?.total_storage_allocation}
                         />
                         <KpiCard title="New Resources" value={summary?.new_resources} />
                     </Box>

@@ -28,9 +28,9 @@ def get_summary():
     resource_summary = db.session.execute(
         select(
             func.count(Resource.id).label("total_resources"),
-            func.coalesce(func.sum(Resource.quantity), 0).label(
-                "total_resource_quantity"
-            ),
+            func.sum(Resource.quantity)
+            .filter(Resource.name == "Storage")
+            .label("total_storage_allocation"),
             func.count(Resource.id)
             .filter(Resource.created_at >= date_cutoff)
             .label("new_resources"),

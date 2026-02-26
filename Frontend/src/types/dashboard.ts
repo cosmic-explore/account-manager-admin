@@ -6,7 +6,7 @@ export type DashboardSummary = {
     active_accounts: number,
     new_accounts: number
     total_resources: number,
-    total_resource_quantity: number,
+    total_storage_allocation: number,
     new_resources: number
 }
 
