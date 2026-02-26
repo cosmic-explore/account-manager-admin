@@ -1,7 +1,7 @@
 from classes.base import db
 from classes.resource import Resource
 
-RESOURCE_MUTABLE_PROPERTIES = ["name", "type", "status", "quantity"]
+RESOURCE_MUTABLE_PROPERTIES = ["name", "type", "status", "quantity", "unit"]
 
 
 def get_all_resources():
@@ -12,8 +12,8 @@ def get_resource(id):
     return Resource.get_by_id(id)
 
 
-def create_resource(name, type, status, quantity, account_id):
-    resource = Resource(name, type, status, quantity, account_id)
+def create_resource(name, type, status, quantity, account_id, unit):
+    resource = Resource(name, type, status, quantity, account_id, unit=unit)
     db.session.add(resource)
     db.session.commit()
     return resource
@@ -33,6 +33,7 @@ def get_resource_dict(resource):
         "type": resource.type,
         "status": resource.status,
         "quantity": resource.quantity,
+        "unit": resource.unit,
         "account_id": resource.account.id,
         "account": resource.account.name,
         "created": resource.created_at,

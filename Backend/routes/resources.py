@@ -83,6 +83,7 @@ def post_resource():
         request_data["status"],
         request_data["quantity"],
         request_data["account_id"],
+        request_data["unit"],
     )
     # record the resource id for the activity log
     g.resource_id = new_resource.id
