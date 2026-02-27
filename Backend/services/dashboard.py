@@ -91,9 +91,11 @@ def get_alerts():
 
     # accounts of which no resources have been updated in the last 30 days
     accounts_stale_resources = db.session.scalars(
-        select(Account).where(
-            ~Account.resources.any(Resource.modified_at >= date_cutoff)
-        )
+        select(Account)
+        .where(~Account.resources.any(Resource.modified_at >= date_cutoff))
+        .where(
+            Account.resources.any(Resource.account_id == Account.id)
+        )  # don't show accounts without resources here
     ).all()
     # accounts without resources
     accounts_no_resources = db.session.scalars(
