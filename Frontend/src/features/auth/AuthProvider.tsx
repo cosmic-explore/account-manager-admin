@@ -18,7 +18,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         requestMe().then(response => {
             if (!response.ok) {
                 setUserStatus({ user: null, loading: false })
-                throw Error(response.statusText)
             } else {
                 response.json().then(user => setUserStatus({ user, loading: false }))
             }
