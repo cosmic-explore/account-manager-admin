@@ -1,8 +1,6 @@
-import './App.css'
+import './styling/App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
 import { LoginPage } from './features/auth/LoginPage'
-import { createTheme } from '@mui/material'
 import { LoginRequired } from './features/auth/LoginRequired'
 import { AppLayout } from './layout/AppLayout'
 import { AccountsPage } from './features/accounts/AccountsPage'
@@ -11,9 +9,6 @@ import { PersonsPage } from './features/persons/PersonsPage'
 import { AdminRequired } from './features/auth/AdminRequired'
 import { ActivitiesPage } from './features/activity/ActivityPage'
 import { DashboardPage } from './features/dashboard/DashboardPage'
-
-const theme = createTheme()
-theme.spacing(2)
 
 function App() {
     return (
