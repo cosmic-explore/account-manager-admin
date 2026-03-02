@@ -5,12 +5,12 @@ import { requestAccountResources } from '../../api/accounts'
 import type { AccountInfo } from '../../types/accounts'
 import { DefaultPage } from '../../layout/DefaultPage'
 import type { ResourceInfo } from '../../types/resources'
-import { DataGrid } from '@mui/x-data-grid'
 import { handleResourceRowUpdate, resourceColumns } from './ResourceTableConfig'
 import { requestCreateResource, requestUpdateResource } from '../../api/resources'
 import { GENERAL_ERROR, NEW_ROW_ID, STATUS_ENUMS } from '../../constants'
 import { Toast } from '../ux-hints/Toast'
 import { useError } from '../ux-hints/ErrorProvider'
+import { StyledDataGrid } from '../../styling/StyledComponents'
 
 export const AccountDetailPage = () => {
     const [account, setAccount] = useState<AccountInfo | null>(null)
@@ -117,18 +117,21 @@ export const AccountDetailPage = () => {
             <Typography variant="h5" align="left" sx={{ pb: '1rem' }}>
                 Resources
             </Typography>
-            <DataGrid
+            <StyledDataGrid
                 editMode="row"
                 columns={resourceColumns}
                 rows={resources}
-                processRowUpdate={(updatedRow: ResourceInfo, originalRow: ResourceInfo) =>
+                processRowUpdate={(updatedRow, originalRow) =>
                     handleResourceRowUpdate(
-                        updatedRow,
-                        originalRow,
+                        updatedRow as ResourceInfo,
+                        originalRow as ResourceInfo,
                         addEditedRow,
                         resources,
                         setResources,
                     )
+                }
+                getRowClassName={params =>
+                    params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
                 }
             />
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', mt: 1 }}>
