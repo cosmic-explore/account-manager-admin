@@ -1,11 +1,12 @@
-import { TableCell, TableRow } from '@mui/material'
+import { TableCell } from '@mui/material'
 import type { ActivityInfo } from '../../types/activities'
 import { Link } from 'react-router'
 import { formatDateString } from '../../utils/string-formatting'
+import { StyledTableRow } from '../../styling/StyledComponents'
 
 export const ActivityTableRow = (props: ActivityInfo) => {
     return (
-        <TableRow>
+        <StyledTableRow>
             <TableCell>{props.action}</TableCell>
             <TableCell>{props.resource}</TableCell>
             <TableCell>
@@ -13,6 +14,6 @@ export const ActivityTableRow = (props: ActivityInfo) => {
             </TableCell>
             <TableCell>{props.person}</TableCell>
             <TableCell>{formatDateString(props.timestamp)}</TableCell>
-        </TableRow>
+        </StyledTableRow>
     )
 }

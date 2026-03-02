@@ -14,6 +14,7 @@ import type { DashboardAlerts } from '../../types/dashboard'
 import type { ResourceInfo } from '../../types/resources'
 import type { AccountInfo } from '../../types/accounts'
 import { Children, type ReactNode } from 'react'
+import { StyledTableRow } from '../../styling/StyledComponents'
 
 export const AlertZone = (props: { alerts: DashboardAlerts }) => {
     return (
@@ -66,21 +67,21 @@ const AlertList = (props: { title: string; children: ReactNode }) => {
 
 const ResourceLink = (props: { resource: ResourceInfo }) => {
     return (
-        <TableRow>
+        <StyledTableRow>
             <TableCell>
                 {props.resource.name} (
                 <Link to={`/accounts/${props.resource.account_id}`}>{props.resource.account}</Link>)
             </TableCell>
-        </TableRow>
+        </StyledTableRow>
     )
 }
 
 const AccountLink = (props: { account: AccountInfo }) => {
     return (
-        <TableRow>
+        <StyledTableRow>
             <TableCell>
                 <Link to={`/accounts/${props.account.id}`}>{props.account.name}</Link>
             </TableCell>
-        </TableRow>
+        </StyledTableRow>
     )
 }
