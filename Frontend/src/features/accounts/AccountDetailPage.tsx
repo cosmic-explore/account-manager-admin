@@ -57,7 +57,7 @@ export const AccountDetailPage = () => {
                 hasError = true
                 continue
             }
-            const { name, type, status, quantity } = rowResource
+            const { name, type, status, quantity, unit } = rowResource
             try {
                 if (resourceId === NEW_ROW_ID) {
                     await requestCreateResource({
@@ -65,6 +65,7 @@ export const AccountDetailPage = () => {
                         type,
                         status,
                         quantity,
+                        unit,
                         account_id: accountId,
                     })
                 } else {
@@ -100,6 +101,7 @@ export const AccountDetailPage = () => {
             type: '',
             status: STATUS_ENUMS[0],
             quantity: 0,
+            unit: '',
             created: '',
             modified: '',
         }

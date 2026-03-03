@@ -33,6 +33,7 @@ export const resourceColumns: GridColDef[] = [
             return { ...params.props, error: hasError }
         },
     },
+    {field: 'unit', headerName: 'Unit', editable: true, flex: 3},
     {
         field: 'created',
         headerName: 'Created',
