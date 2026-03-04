@@ -2,10 +2,10 @@ import { Card, CardContent, Typography } from '@mui/material'
 
 export const KpiCard = (props: { title: string; value: number | undefined }) => {
     return (
-        <Card>
+        <Card elevation={3} sx={{ backgroundColor: 'primary.light' }}>
             <CardContent>
-                <Typography>{props.title}</Typography>
-                <Typography>{props.value}</Typography>
+                <Typography variant="button">{props.title}</Typography>
+                <Typography fontSize="3rem">{props.value}</Typography>
             </CardContent>
         </Card>
     )

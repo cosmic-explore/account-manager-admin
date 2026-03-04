@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material'
+import { Button, Stack, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { requestAccountResources } from '../../api/accounts'
@@ -136,7 +136,7 @@ export const AccountDetailPage = () => {
                     params.indexRelativeToCurrentPage % 2 === 0 ? 'even' : 'odd'
                 }
             />
-            <Box sx={{ display: 'flex', justifyContent: 'flex-start', mt: 1 }}>
+            <Stack direction="row" sx={{ justifyContent: 'flex-start', mt: 1 }}>
                 <Button disabled={!isEdited} variant="contained" onClick={handleUpdateClick}>
                     Confirm Updates
                 </Button>
@@ -148,7 +148,7 @@ export const AccountDetailPage = () => {
                 >
                     Add Row
                 </Button>
-            </Box>
+            </Stack>
             <Toast
                 open={successNoteViz}
                 setOpen={setSuccessNoteViz}

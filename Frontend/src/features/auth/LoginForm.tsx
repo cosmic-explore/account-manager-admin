@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, Input, InputLabel, Typography } from '@mui/material'
+import { Button, FormControl, Input, InputLabel, Stack, Typography } from '@mui/material'
 import { useState } from 'react'
 import { useAuth } from './AuthProvider'
 import { CREDENTIALS_ERROR } from '../../constants'
@@ -31,7 +31,7 @@ export const LoginForm = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <Stack>
                 <FormControl variant="standard" sx={{ m: 1 }}>
                     <InputLabel>Email</InputLabel>
                     <Input id="email" onChange={event => setEmail(event.target.value)}></Input>
@@ -48,7 +48,7 @@ export const LoginForm = () => {
                 <Button type="submit" disabled={loading} variant="contained" sx={{ m: 1 }}>
                     {loading ? 'Signing in…' : 'Sign in'}
                 </Button>
-            </Box>
+            </Stack>
         </form>
     )
 }

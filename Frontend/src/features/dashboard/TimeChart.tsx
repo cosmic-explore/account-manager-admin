@@ -18,11 +18,12 @@ export const TimeChart = (props: { title: string; monthBuckets: MonthBucket[] })
     const settings = {
         xAxis: [{ dataKey: 'x', label: 'Month' }],
         yAxis: [{ label: 'New Accounts' }],
-        height: 300,
+        height: 400,
+        width: 450,
     }
 
     return (
-        <Card>
+        <Card elevation={3}>
             <CardContent>
                 <Typography sx={{ mb: '1rem' }} fontWeight="bold">
                     {props.title}

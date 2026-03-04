@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Card, CardContent, Stack, Typography } from '@mui/material'
 import { DefaultPage } from '../../layout/DefaultPage'
 import { useEffect, useState } from 'react'
 import { requestDashboardData } from '../../api/dashboard'
@@ -46,12 +46,15 @@ export const DashboardPage = () => {
 
     return (
         <DefaultPage>
-            <Typography variant="h4" sx={{ pb: '1rem' }}>
-                Dashboard
-            </Typography>
-            <Box>
+            <Stack sx={{ pb: '1rem' }}>
+                <Typography variant="h3">Dashboard</Typography>
+                <Typography variant="body2" color="text.secondary">
+                    Overview of accounts and resource usage
+                </Typography>
+            </Stack>
+            <Stack>
                 <DashboardSection>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
                         <KpiCard title="Total Accounts" value={summary?.total_accounts} />
                         <KpiCard title="Active Accounts" value={summary?.active_accounts} />
                         <KpiCard title="New Accounts" value={summary?.new_accounts} />
@@ -61,31 +64,38 @@ export const DashboardPage = () => {
                             value={summary?.total_storage_allocation}
                         />
                         <KpiCard title="New Resources" value={summary?.new_resources} />
-                    </Box>
-                </DashboardSection>
-                <DashboardSection>
-                    <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <TimeChart title="Account Growth by Month" monthBuckets={accountGrowth} />
-                        <DistributionChart
-                            title="Resource Distribution By Type"
-                            typeBuckets={resourceDist}
-                        />
-                    </Box>
+                    </Stack>
                 </DashboardSection>
                 <DashboardSection>
                     <AlertZone alerts={alerts} />
                 </DashboardSection>
+                <DashboardSection>
+                    <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
+                        <TimeChart title="Account Creation by Month" monthBuckets={accountGrowth} />
+                        <Box sx={{ flex: 1 }} />
+                        <DistributionChart
+                            title="Resource Distribution by Type"
+                            typeBuckets={resourceDist}
+                        />
+                    </Stack>
+                </DashboardSection>
                 <AdminOnlyWrapper>
                     <DashboardSection>
-                        <Typography variant="h5">Recent Activity</Typography>
-                        <ActivityLog activityList={activities} />
+                        <Card elevation={3}>
+                            <CardContent>
+                                <Typography variant="h4" sx={{ mb: '1rem' }}>
+                                    Recent Activity
+                                </Typography>
+                                <ActivityLog activityList={activities} />
+                            </CardContent>
+                        </Card>
                     </DashboardSection>
                 </AdminOnlyWrapper>
-            </Box>
+            </Stack>
         </DefaultPage>
     )
 }
 
 const DashboardSection = ({ children }: { children: React.ReactNode }) => {
-    return <Box sx={{ mb: '1rem' }}>{children}</Box>
+    return <Box sx={{ mb: '1.5rem' }}>{children}</Box>
 }

@@ -2,6 +2,7 @@ import {
     Box,
     Card,
     CardContent,
+    Stack,
     Table,
     TableBody,
     TableCell,
@@ -15,29 +16,49 @@ import type { ResourceInfo } from '../../types/resources'
 import type { AccountInfo } from '../../types/accounts'
 import { Children, type ReactNode } from 'react'
 import { StyledTableRow } from '../../styling/StyledComponents'
+import { WarningAmber } from '@mui/icons-material'
 
 export const AlertZone = (props: { alerts: DashboardAlerts }) => {
     return (
-        <Box>
-            <Typography variant="h5">Needs Attention</Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                <AlertList title="Accounts with Stale Resources">
-                    {props.alerts?.accounts_stale_resources.map(account => (
-                        <AccountLink key={account.id} account={account} />
-                    ))}
-                </AlertList>
-                <AlertList title="Accounts with No Resources">
-                    {props.alerts?.accounts_no_resources.map(account => (
-                        <AccountLink key={account.id} account={account} />
-                    ))}
-                </AlertList>
-                <AlertList title="Zero Quantity Resources">
-                    {props.alerts?.resources_no_quantity.map(resource => (
-                        <ResourceLink key={resource.id} resource={resource} />
-                    ))}
-                </AlertList>
-            </Box>
-        </Box>
+        <Card
+            elevation={0}
+            sx={{
+                backgroundColor: 'warning.light',
+                border: theme => `1px solid ${theme.palette.warning.main}`,
+            }}
+        >
+            <CardContent>
+                <Typography variant="h4" color="warning.dark" sx={{ mb: '1rem' }}>
+                    {/* The linter doens't expect the .dark in the color below even though it works */}
+                    {/* @ts-ignore */}
+                    <WarningAmber color="warning.dark" sx={{ mr: '.5rem' }} />
+                    Needs Attention
+                </Typography>
+                <Stack direction="row" sx={{ justifyContent: 'space-evenly' }}>
+                    <Box>
+                        <AlertList title="Accounts with Stale Resources">
+                            {props.alerts?.accounts_stale_resources.map(account => (
+                                <AccountLink key={account.id} account={account} />
+                            ))}
+                        </AlertList>
+                    </Box>
+                    <Box>
+                        <AlertList title="Accounts with No Resources">
+                            {props.alerts?.accounts_no_resources.map(account => (
+                                <AccountLink key={account.id} account={account} />
+                            ))}
+                        </AlertList>
+                    </Box>
+                    <Box>
+                        <AlertList title="Zero Quantity Resources">
+                            {props.alerts?.resources_no_quantity.map(resource => (
+                                <ResourceLink key={resource.id} resource={resource} />
+                            ))}
+                        </AlertList>
+                    </Box>
+                </Stack>
+            </CardContent>
+        </Card>
     )
 }
 
@@ -48,7 +69,7 @@ const AlertList = (props: { title: string; children: ReactNode }) => {
     }
 
     return (
-        <Card>
+        <Card elevation={3}>
             <CardContent>
                 <Table>
                     <TableHead>

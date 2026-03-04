@@ -8,13 +8,13 @@ export const DistributionChart = (props: { title: string; typeBuckets: TypeBucke
     })
 
     const settings = {
-        width: 300,
-        height: 300,
+        width: 400,
+        height: 400,
     }
 
     // style it as a donut chart
     return (
-        <Card>
+        <Card elevation={3}>
             <CardContent>
                 <Typography sx={{ mb: '1rem' }} fontWeight="bold">
                     {props.title}
