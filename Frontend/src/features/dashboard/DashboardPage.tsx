@@ -29,6 +29,11 @@ export const DashboardPage = () => {
     })
     const [activities, setActivities] = useState<ActivityInfo[]>([])
     const { showError } = useError()
+    const hasAlerts =
+        alerts.accounts_no_resources.length +
+            alerts.accounts_stale_resources.length +
+            alerts.resources_no_quantity.length >
+        0
 
     useEffect(() => {
         try {
@@ -66,9 +71,13 @@ export const DashboardPage = () => {
                         <KpiCard title="New Resources" value={summary?.new_resources} />
                     </Stack>
                 </DashboardSection>
-                <DashboardSection>
-                    <AlertZone alerts={alerts} />
-                </DashboardSection>
+                {hasAlerts ? (
+                    <DashboardSection>
+                        <AlertZone alerts={alerts} />
+                    </DashboardSection>
+                ) : (
+                    ''
+                )}
                 <DashboardSection>
                     <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
                         <TimeChart title="Account Creation by Month" monthBuckets={accountGrowth} />
