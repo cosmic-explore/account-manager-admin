@@ -35,27 +35,21 @@ export const AlertZone = (props: { alerts: DashboardAlerts }) => {
                     Needs Attention
                 </Typography>
                 <Stack direction="row" sx={{ justifyContent: 'space-evenly' }}>
-                    <Box>
-                        <AlertList title="Accounts with Stale Resources">
-                            {props.alerts?.accounts_stale_resources.map(account => (
-                                <AccountLink key={account.id} account={account} />
-                            ))}
-                        </AlertList>
-                    </Box>
-                    <Box>
-                        <AlertList title="Accounts with No Resources">
-                            {props.alerts?.accounts_no_resources.map(account => (
-                                <AccountLink key={account.id} account={account} />
-                            ))}
-                        </AlertList>
-                    </Box>
-                    <Box>
-                        <AlertList title="Zero Quantity Resources">
-                            {props.alerts?.resources_no_quantity.map(resource => (
-                                <ResourceLink key={resource.id} resource={resource} />
-                            ))}
-                        </AlertList>
-                    </Box>
+                    <AlertList title="Accounts with Stale Resources">
+                        {props.alerts?.accounts_stale_resources.map(account => (
+                            <AccountLink key={account.id} account={account} />
+                        ))}
+                    </AlertList>
+                    <AlertList title="Accounts with No Resources">
+                        {props.alerts?.accounts_no_resources.map(account => (
+                            <AccountLink key={account.id} account={account} />
+                        ))}
+                    </AlertList>
+                    <AlertList title="Zero Quantity Resources">
+                        {props.alerts?.resources_no_quantity.map(resource => (
+                            <ResourceLink key={resource.id} resource={resource} />
+                        ))}
+                    </AlertList>
                 </Stack>
             </CardContent>
         </Card>
