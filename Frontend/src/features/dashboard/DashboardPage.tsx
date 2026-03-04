@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Stack, Typography } from '@mui/material'
+import { Card, CardContent, Stack, Typography } from '@mui/material'
 import { DefaultPage } from '../../layout/DefaultPage'
 import { useEffect, useState } from 'react'
 import { requestDashboardData } from '../../api/dashboard'
@@ -57,54 +57,37 @@ export const DashboardPage = () => {
                     Overview of accounts and resource usage
                 </Typography>
             </Stack>
-            <Stack>
-                <DashboardSection>
-                    <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
-                        <KpiCard title="Total Accounts" value={summary?.total_accounts} />
-                        <KpiCard title="Active Accounts" value={summary?.active_accounts} />
-                        <KpiCard title="New Accounts" value={summary?.new_accounts} />
-                        <KpiCard title="Total Resources" value={summary?.total_resources} />
-                        <KpiCard
-                            title="Total Storage Allocated (GB)"
-                            value={summary?.total_storage_allocation}
-                        />
-                        <KpiCard title="New Resources" value={summary?.new_resources} />
-                    </Stack>
-                </DashboardSection>
-                {hasAlerts ? (
-                    <DashboardSection>
-                        <AlertZone alerts={alerts} />
-                    </DashboardSection>
-                ) : (
-                    ''
-                )}
-                <DashboardSection>
-                    <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
-                        <TimeChart title="Account Creation by Month" monthBuckets={accountGrowth} />
-                        <Box sx={{ flex: 1 }} />
-                        <DistributionChart
-                            title="Resource Distribution by Type"
-                            typeBuckets={resourceDist}
-                        />
-                    </Stack>
-                </DashboardSection>
+            <Stack spacing={2}>
+                <Stack direction="row" spacing={1} sx={{ justifyContent: 'space-between' }}>
+                    <KpiCard title="Total Accounts" value={summary?.total_accounts} />
+                    <KpiCard title="Active Accounts" value={summary?.active_accounts} />
+                    <KpiCard title="New Accounts" value={summary?.new_accounts} />
+                    <KpiCard title="Total Resources" value={summary?.total_resources} />
+                    <KpiCard
+                        title="Total Storage Allocated (GB)"
+                        value={summary?.total_storage_allocation}
+                    />
+                    <KpiCard title="New Resources" value={summary?.new_resources} />
+                </Stack>
+                {hasAlerts ? <AlertZone alerts={alerts} /> : ''}
+                <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
+                    <TimeChart title="Account Creation by Month" monthBuckets={accountGrowth} />
+                    <DistributionChart
+                        title="Resource Distribution by Type"
+                        typeBuckets={resourceDist}
+                    />
+                </Stack>
                 <AdminOnlyWrapper>
-                    <DashboardSection>
-                        <Card elevation={3}>
-                            <CardContent>
-                                <Typography variant="h4" sx={{ mb: '1rem' }}>
-                                    Recent Activity
-                                </Typography>
-                                <ActivityLog activityList={activities} />
-                            </CardContent>
-                        </Card>
-                    </DashboardSection>
+                    <Card elevation={3}>
+                        <CardContent>
+                            <Typography variant="h4" sx={{ mb: '1rem' }}>
+                                Recent Activity
+                            </Typography>
+                            <ActivityLog activityList={activities} />
+                        </CardContent>
+                    </Card>
                 </AdminOnlyWrapper>
             </Stack>
         </DefaultPage>
     )
-}
-
-const DashboardSection = ({ children }: { children: React.ReactNode }) => {
-    return <Box sx={{ mb: '1.5rem' }}>{children}</Box>
 }
