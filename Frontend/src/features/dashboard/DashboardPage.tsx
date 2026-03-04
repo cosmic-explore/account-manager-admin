@@ -70,11 +70,20 @@ export const DashboardPage = () => {
                     <KpiCard title="New Resources" value={summary?.new_resources} />
                 </Stack>
                 {hasAlerts ? <AlertZone alerts={alerts} /> : ''}
-                <Stack direction="row" sx={{ justifyContent: 'space-between' }}>
-                    <TimeChart title="Account Creation by Month" monthBuckets={accountGrowth} />
+                <Stack
+                    direction="row"
+                    spacing={2}
+                    sx={{ justifyContent: 'space-between', height: '25rem' }}
+                >
+                    <TimeChart
+                        title="Account Creation by Month"
+                        monthBuckets={accountGrowth}
+                        sx={{ flex: 10 }}
+                    />
                     <DistributionChart
                         title="Resource Distribution by Type"
                         typeBuckets={resourceDist}
+                        sx={{ flex: 7 }}
                     />
                 </Stack>
                 <AdminOnlyWrapper>

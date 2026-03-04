@@ -1,8 +1,12 @@
-import { Card, CardContent, Typography } from '@mui/material'
+import { Card, CardContent, Typography, type SxProps, type Theme } from '@mui/material'
 import type { MonthBucket } from '../../types/dashboard'
 import { BarChart } from '@mui/x-charts'
 
-export const TimeChart = (props: { title: string; monthBuckets: MonthBucket[] }) => {
+export const TimeChart = (props: {
+    title: string
+    monthBuckets: MonthBucket[]
+    sx: SxProps<Theme>
+}) => {
     const sortedMonths = props.monthBuckets
         .map(bucket => {
             // subtract 1 from month because Date uses 0 index
@@ -18,13 +22,11 @@ export const TimeChart = (props: { title: string; monthBuckets: MonthBucket[] })
     const settings = {
         xAxis: [{ dataKey: 'x', label: 'Month' }],
         yAxis: [{ label: 'New Accounts' }],
-        height: 400,
-        width: 450,
     }
 
     return (
-        <Card elevation={3}>
-            <CardContent>
+        <Card elevation={3} sx={props.sx}>
+            <CardContent sx={{ height: '100%' }}>
                 <Typography sx={{ mb: '1rem' }} fontWeight="bold">
                     {props.title}
                 </Typography>
