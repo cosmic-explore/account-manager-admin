@@ -1,18 +1,13 @@
-"""Run this script from the backend docker container"""
-
+import sqlalchemy as sa
+from datetime import date
+from classes import Person, Account, Resource, Activity
+from utility.hashing import Hasher
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
 
-import sqlalchemy as sa
 
-from datetime import date
-from utility.hashing import Hasher
-from classes import Person, Account, Resource, Activity
-from app import app, db
-
-
-def clear_tables():
+def clear_tables(db):
     db.session.execute(sa.delete(Activity))
     db.session.execute(sa.delete(Resource))
     db.session.execute(sa.delete(Account))
@@ -46,7 +41,7 @@ resource_archtypes = [
 ]
 
 
-def seed_tables():
+def seed_tables(db):
     password_hasher = Hasher()
 
     test_persons = [
@@ -115,8 +110,7 @@ def seed_tables():
     db.session.commit()
 
 
-with app.app_context():
-    clear_tables()
-    seed_tables()
-
-logging.info("Database has been reset.")
+def reset_db(db):
+    clear_tables(db)
+    seed_tables(db)
+    logging.info("Database has been reset.")

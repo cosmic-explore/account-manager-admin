@@ -1,18 +1,37 @@
-import { Drawer, Box, ListItemButton, ListItemText } from '@mui/material'
+import {
+    Drawer,
+    Box,
+    ListItemButton,
+    ListItemText,
+    Alert,
+    AlertTitle,
+    Typography,
+    Button,
+} from '@mui/material'
 import {
     DashboardOutlined,
     PeopleAltOutlined,
     ListOutlined,
     HandshakeOutlined,
 } from '@mui/icons-material'
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { AdminOnlyWrapper } from '../../layout/AdminOnlyWrapper'
+import { resetApp } from '../../api/demo'
 
 export const Navbar = (props: { width: number }) => {
     const location = useLocation()
+    const navigate = useNavigate()
 
     const isLocation = (path: string) => {
         return path == location.pathname
+    }
+
+    const handleResetAppClick = () => {
+        if (confirm('Are you sure you want to reset the demo?')) {
+            resetApp().then(() => {
+                navigate('/')
+            })
+        }
     }
 
     return (
@@ -60,6 +79,22 @@ export const Navbar = (props: { width: number }) => {
                     </ListItemButton>
                 </AdminOnlyWrapper>
             </nav>
+            <Alert severity="info" sx={{ mt: '2rem', textAlign: 'left' }}>
+                <AlertTitle>How to use the app</AlertTitle>
+                <Typography variant="body1" sx={{ mb: '.5rem' }}>
+                    From the dashboard, you have a view of system metrics, as well as pending
+                    alerts. You can resolve the alerts to remove the
+                    <strong> Needs Attention </strong>
+                    section from the dashboard.
+                </Typography>
+                <Typography variant="body1" sx={{ mb: '.5rem' }}>
+                    If you want a clean slate, you can reset the app to its original state with the
+                    button below. This will clear user activity restore the original alerts.
+                </Typography>
+                <Button variant="contained" onClick={handleResetAppClick}>
+                    Reset App
+                </Button>
+            </Alert>
         </Drawer>
     )
 }

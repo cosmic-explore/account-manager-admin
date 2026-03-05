@@ -14,6 +14,7 @@ from routes import (
     persons_bp,
     resources_bp,
     dashboard_bp,
+    demo_bp,
 )
 
 app = Flask(__name__)
@@ -43,6 +44,7 @@ app.register_blueprint(auth_bp)
 app.register_blueprint(persons_bp)
 app.register_blueprint(resources_bp)
 app.register_blueprint(dashboard_bp)
+app.register_blueprint(demo_bp)
 
 
 if __name__ == "__main__":

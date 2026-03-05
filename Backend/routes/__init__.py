@@ -4,3 +4,4 @@ from .activities import activities_bp
 from .resources import resources_bp
 from .persons import persons_bp
 from .dashboard import dashboard_bp
+from .demo import demo_bp
