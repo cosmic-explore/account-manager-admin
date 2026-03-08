@@ -89,7 +89,7 @@ export const Navbar = (props: { width: number }) => {
                 </Typography>
                 <Typography variant="body1" sx={{ mb: '.5rem' }}>
                     If you want a clean slate, you can reset the app to its original state with the
-                    button below. This will clear user activity restore the original alerts.
+                    button below. This will clear user activity and restore the original alerts.
                 </Typography>
                 <Button variant="contained" onClick={handleResetAppClick}>
                     Reset App
