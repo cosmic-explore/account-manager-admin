@@ -13,33 +13,41 @@ def get_summary():
     """Returns various account and resource related metrics"""
     date_cutoff = datetime.now(timezone.utc) - timedelta(days=30)
 
-    account_summary = db.session.execute(
-        select(
-            func.count(Account.id).label("total_accounts"),
-            func.count(Account.id)
-            .filter(Account.status == "active")
-            .label("active_accounts"),
-            func.count(Account.id)
-            .filter(Account.created_at >= date_cutoff)
-            .label("new_accounts"),
+    account_summary = (
+        db.session.execute(
+            select(
+                func.count(Account.id).label("total_accounts"),
+                func.count(Account.id)
+                .filter(Account.status == "active")
+                .label("active_accounts"),
+                func.count(Account.id)
+                .filter(Account.created_at >= date_cutoff)
+                .label("new_accounts"),
+            )
         )
-    ).one()
+        .mappings()
+        .one()
+    )
 
-    resource_summary = db.session.execute(
-        select(
-            func.count(Resource.id).label("total_resources"),
-            func.sum(Resource.quantity)
-            .filter(Resource.name == "Storage")
-            .label("total_storage_allocation"),
-            func.count(Resource.id)
-            .filter(Resource.created_at >= date_cutoff)
-            .label("new_resources"),
+    resource_summary = (
+        db.session.execute(
+            select(
+                func.count(Resource.id).label("total_resources"),
+                func.coalesce(
+                    func.sum(Resource.quantity).filter(Resource.name == "Storage"), 0
+                ).label("total_storage_allocation"),
+                func.count(Resource.id)
+                .filter(Resource.created_at >= date_cutoff)
+                .label("new_resources"),
+            )
         )
-    ).one()
+        .mappings()
+        .one()
+    )
 
     return {
-        **account_summary._asdict(),
-        **resource_summary._asdict(),
+        **account_summary,
+        **resource_summary,
     }
 
 
@@ -77,12 +85,16 @@ def get_account_growth():
 
 def get_resource_distribution():
     """returns the count of resources by type"""
-    resources = db.session.execute(
-        select(Resource.type, func.count(Resource.id).label("count")).group_by(
-            Resource.type
+    resources = (
+        db.session.execute(
+            select(Resource.type, func.count(Resource.id).label("count")).group_by(
+                Resource.type
+            )
         )
-    ).all()
-    return [row._asdict() for row in resources]
+        .mappings()
+        .all()
+    )
+    return resources
 
 
 def get_alerts():
