@@ -7,3 +7,6 @@ gunicorn
 gevent
 alembic
 dotenv
+pytest
+factory_boy
+freezegun
