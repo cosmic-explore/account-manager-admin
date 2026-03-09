@@ -83,9 +83,8 @@ export const Navbar = (props: { width: number }) => {
                 <AlertTitle>How to use the app</AlertTitle>
                 <Typography variant="body1" sx={{ mb: '.5rem' }}>
                     From the dashboard, you have a view of system metrics, as well as pending
-                    alerts. You can resolve the alerts to remove the
-                    <strong> Needs Attention </strong>
-                    section from the dashboard.
+                    alerts. By updating resources, you can resolve the alerts to remove the
+                    <strong> Needs Attention </strong> section from the dashboard.
                 </Typography>
                 <Typography variant="body1" sx={{ mb: '.5rem' }}>
                     If you want a clean slate, you can reset the app to its original state with the

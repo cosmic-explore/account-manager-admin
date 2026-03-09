@@ -44,7 +44,7 @@ export const AlertZone = (props: { alerts: DashboardAlerts }) => {
                             <AccountLink key={account.id} account={account} />
                         ))}
                     </AlertList>
-                    <AlertList title="Zero Quantity Resources">
+                    <AlertList title="Resources with Zero Quantity">
                         {props.alerts?.resources_no_quantity.map(resource => (
                             <ResourceLink key={resource.id} resource={resource} />
                         ))}
