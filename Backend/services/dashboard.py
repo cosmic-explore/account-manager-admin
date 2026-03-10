@@ -13,6 +13,8 @@ def get_summary():
     """Returns various account and resource related metrics"""
     date_cutoff = datetime.now(timezone.utc) - timedelta(days=30)
 
+    # using "mappings" prevents counts of 0 to resolve as None
+
     account_summary = (
         db.session.execute(
             select(
@@ -85,16 +87,12 @@ def get_account_growth():
 
 def get_resource_distribution():
     """returns the count of resources by type"""
-    resources = (
-        db.session.execute(
-            select(Resource.type, func.count(Resource.id).label("count")).group_by(
-                Resource.type
-            )
+    resources = db.session.execute(
+        select(Resource.type, func.count(Resource.id).label("count")).group_by(
+            Resource.type
         )
-        .mappings()
-        .all()
-    )
-    return resources
+    ).all()
+    return [row._asdict() for row in resources]
 
 
 def get_alerts():
