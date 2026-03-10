@@ -1,7 +1,7 @@
 """add quantity column to resource
 
 Revision ID: 69f066c28818
-Revises: 16e53ded2c15
+Revises: 582f6d893e7f
 Create Date: 2026-02-02 22:27:24.140622
 
 """
@@ -14,7 +14,7 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision: str = "69f066c28818"
-down_revision: Union[str, Sequence[str], None] = "16e53ded2c15"
+down_revision: Union[str, Sequence[str], None] = "582f6d893e7f"
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 

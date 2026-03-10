@@ -25,7 +25,7 @@ services:
     depends_on:
       - database
   database:
-    image: "onthesafari/account-manager-postgres"
+    image: "postgres:latest"
     env_file:
       - ".env"
     build:
