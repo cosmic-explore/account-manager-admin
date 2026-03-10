@@ -4,5 +4,7 @@ from app import factory
 from classes.base import db
 from services.demo import reset_db
 
-with factory.app_context():
+app = factory.create_app()
+
+with app.app_context():
     reset_db(db)
