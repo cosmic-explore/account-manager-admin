@@ -3,8 +3,8 @@ services:
     image: onthesafari/account-manager-frontend
     build:
       context: ./Frontend
-    environment:
-      - VITE_HOST_ROOT=http://127.0.0.1:8888
+    env_file:
+      - ".env"
     ports:
       - "5173:5173"
     volumes:
@@ -19,7 +19,7 @@ services:
     build:
       context: ./Backend
     ports:
-      - "8888:5000"
+      - "8080:8080"
     volumes:
       - ./Backend:/usr/src/app
     depends_on:

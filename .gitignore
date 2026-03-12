@@ -18,6 +18,12 @@ Database/data
 
 # sensitive info
 .env
+frontend/.env*
+
+# deployment specific
+Backend/deploy
+Frontend/firebase*
+Frontend/.firebase*
 
 # gunicorn
 Backend/*.ctl

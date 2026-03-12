@@ -23,7 +23,7 @@ connection_url = sqlalchemy.engine.URL.create(
     password=os.getenv("POSTGRES_PASSWORD"),
     host=os.getenv("POSTGRES_HOST"),
     # host="database",
-    port=int(os.getenv("POSTGRES_PORT")),
+    port=int(os.getenv("ALEMBIC_POSTGRES_PORT")),
     database=os.getenv("POSTGRES_DB"),
 ).render_as_string(hide_password=False)
 config.set_main_option("sqlalchemy.url", connection_url)

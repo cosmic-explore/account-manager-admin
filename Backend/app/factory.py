@@ -30,10 +30,12 @@ def create_app(config_override=None):
     # configure cors
     app.config["SESSION_COOKIE_SAMESITE"] = "None"  # Allow cross-origin cookies
     app.config["SESSION_COOKIE_SECURE"] = True
-    app.config["CORS_ORIGIN"] = os.environ.get("CORS_ORIGIN", "http://localhost")
+    app.config["CORS_ORIGIN"] = os.environ.get("CORS_ORIGIN", "http://localhost").split(
+        ","
+    )
     CORS(
         app,
-        origins=[*app.config["CORS_ORIGIN"].split(",")],
+        origins=app.config["CORS_ORIGIN"],
         supports_credentials=True,
     )
 

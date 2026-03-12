@@ -1,6 +1,6 @@
 import { SERVER_ERROR } from "../constants"
 
-export const HOST_ROOT = `${import.meta.env.VITE_HOST_ROOT}`
+export const API_ROOT = `${import.meta.env.VITE_API_ROOT}`
 
 export const buildGetRequest = (): RequestInit => {
     return {

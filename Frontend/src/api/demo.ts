@@ -1,5 +1,5 @@
-import { buildUpdateRequest, HOST_ROOT } from "./util"
+import { buildUpdateRequest, API_ROOT } from "./util"
 
 export const resetApp = async () => {
-    return await fetch(`${HOST_ROOT}/demo/reset`, buildUpdateRequest('POST', ''))
+    return await fetch(`${API_ROOT}/demo/reset`, buildUpdateRequest('POST', ''))
 }

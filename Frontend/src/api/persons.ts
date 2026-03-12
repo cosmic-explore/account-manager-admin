@@ -1,7 +1,7 @@
-import { buildGetRequest, handleServerError, HOST_ROOT } from "./util"
+import { buildGetRequest, handleServerError, API_ROOT } from "./util"
 
 export const requestMe = async () => {
-    const response = await fetch(`${HOST_ROOT}/persons/me`, buildGetRequest())
+    const response = await fetch(`${API_ROOT}/persons/me`, buildGetRequest())
     // don't need to throw an error if the user is just not authenticated
     if (!(response.status === 401)) {
         handleServerError(response, 'Error retrieving uesr data')
@@ -10,7 +10,7 @@ export const requestMe = async () => {
 }
 
 export const requestPersons = async () => {
-    const response = await fetch(`${HOST_ROOT}/persons`, buildGetRequest())
+    const response = await fetch(`${API_ROOT}/persons`, buildGetRequest())
     handleServerError(response, 'Error retrieving persons')
     return response.json()
 }
