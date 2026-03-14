@@ -3,8 +3,6 @@ name: Backend Tests
 on:
     workflow_call:
     pull_request:
-    push:
-        branches: [main]
 
 jobs:
     test-backend:
