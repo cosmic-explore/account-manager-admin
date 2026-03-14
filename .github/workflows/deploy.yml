@@ -31,14 +31,24 @@ jobs:
             - name: Set up gcloud
               uses: google-github-actions/setup-gcloud@v2
 
+            - name: Tag Docker Image
+              run: |
+                  docker tag onthesafari/account-manager-backend:latest \
+                  us-central1-docker.pkg.dev/${{secrets.GCP_PROJECT_ID}}/account-manager-backend/account-manager-backend:latest
+
+            - name: Push Docker Image
+              run: |
+                  docker push us-central1-docker.pkg.dev/${{secrets.GCP_PROJECT_ID}}/account-manager-backend/account-manager-backend:latest
+
             - id: 'deploy-cloud-run'
               name: Deploy Cloud Run
               run: |
                   gcloud run deploy my-service \
-                    --project ${{secrets.GCP_PROJECT_ID}}
-                    --source ./Backend \
+                    --project ${{secrets.GCP_PROJECT_ID}} \
+                    --image us-central1-docker.pkg.dev/${{secrets.GCP_PROJECT_ID}}/account-manager-backend/account-manager-backend:latest \
+                    --env-vars-file ./env.yaml \
+                    --set-secrets ${{secrets.SECRETS_STRING}} \
                     --region us-central1 \
-                    --platform managed \
                     --allow-unauthenticated
 
             - name: Install Firebase CLI
