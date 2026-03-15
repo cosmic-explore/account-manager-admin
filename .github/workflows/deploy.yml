@@ -54,7 +54,7 @@ jobs:
                   gcloud run deploy my-service \
                     --project ${{secrets.GCP_PROJECT_ID}} \
                     --image us-central1-docker.pkg.dev/${{secrets.GCP_PROJECT_ID}}/account-manager-backend/account-manager-backend:latest \
-                    --env-vars-file ./env.yaml \
+                    --env-vars-file ./.github/workflows/env.yaml \
                     --set-secrets ${{secrets.SECRETS_STRING}} \
                     --region us-central1 \
                     --allow-unauthenticated
