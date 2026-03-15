@@ -65,7 +65,7 @@ jobs:
             # no token needed because alerady authenticated to GCloud service account
             - name: Deploy Firebase
               run: |
-                  cd frontend
+                  cd Frontend
                   npm install
                   npm run build
                   firebase deploy --project ${{secrets.GCP_PROJECT_ID}}
