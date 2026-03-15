@@ -9,7 +9,7 @@ jobs:
     test:
         uses: ./.github/workflows/test-backend.yml
 
-    deploy:
+    deploy-backend:
         needs: test
         runs-on: ubuntu-latest
 
@@ -59,10 +59,27 @@ jobs:
                     --region us-central1 \
                     --allow-unauthenticated
 
+    deploy-frontend:
+        needs: deploy-backend
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - id: 'auth'
+              name: 'Authenticate to Google Cloud'
+              uses: 'google-github-actions/auth@v2'
+              with:
+                  create_credentials_file: true
+                  workload_identity_provider: ${{secrets.WORKLOAD_IDENTITY_PROVIDER}}
+                  service_account: ${{secrets.SERVICE_ACCOUNT_EMAIL}}
+
+            - name: Set up gcloud
+              uses: google-github-actions/setup-gcloud@v2
+
             - name: Install Firebase CLI
               run: npm install -g firebase-tools
 
-            # no token needed because alerady authenticated to GCloud service account
             - name: Deploy Firebase
               run: |
                   cd Frontend

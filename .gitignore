@@ -22,8 +22,7 @@ frontend/.env*
 
 # deployment specific
 Backend/deploy
-Frontend/firebase*
-Frontend/.firebase*
+Frontend/.firebase/*
 
 # gunicorn
 Backend/*.ctl
