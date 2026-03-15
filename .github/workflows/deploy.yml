@@ -63,6 +63,9 @@ jobs:
         needs: deploy-backend
         runs-on: ubuntu-latest
 
+        env:
+            VITE_API_ROOT: ${{secrets.VITE_API_ROOT}}
+
         steps:
             - uses: actions/checkout@v4
 
