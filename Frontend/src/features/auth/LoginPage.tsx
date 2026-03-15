@@ -21,9 +21,9 @@ export const LoginPage = () => {
                 <Alert severity="info" sx={{ mt: '1rem', textAlign: 'left' }}>
                     <AlertTitle>Login Information</AlertTitle>
                     <Typography variant="body1" sx={{ mb: '1rem' }}>
-                        Welcome! This demo has two types of user. In addition to everything Staff
-                        can do, Admins can also view user activity on the platform. You can login to
-                        each using the following credentials:
+                        Welcome! This demo has two types of user. Admins can view user activity on
+                        the platform, in addition to everything Staff can do. You can login to each
+                        using the following credentials:
                     </Typography>
                     <Box sx={{ mb: '1rem' }}>
                         <Typography>Staff</Typography>
