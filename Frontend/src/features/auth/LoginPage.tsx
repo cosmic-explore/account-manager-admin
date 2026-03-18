@@ -6,14 +6,17 @@ import { LoginForm } from './LoginForm'
 export const LoginPage = () => {
     return (
         <Container sx={{ minHeight: '100vh' }}>
-            <Typography variant="h2" sx={{ pt: '4rem', pb: '4rem' }}>
-                Account Management Platform
+            <Typography variant="h2" sx={{ pt: '4rem' }}>
+                AccountCore
+            </Typography>
+            <Typography variant="body1" sx={{ pb: '4rem' }}>
+                Customer account management and administrative oversight
             </Typography>
             <Container maxWidth="sm">
                 <Card variant="outlined" sx={{ p: '2rem' }}>
                     <CardContent>
                         <Typography variant="h5" align="left">
-                            Sign in
+                            Welcome back
                         </Typography>
                         <LoginForm />
                     </CardContent>
