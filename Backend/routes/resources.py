@@ -73,7 +73,6 @@ def get_resources():
 
 @resources_bp.route("", methods=[HTTP_POST])
 @login_required
-@admin_required
 @log_activity(CREATE_RESOURCE)
 def post_resource():
     request_data = request.get_json()
