@@ -215,3 +215,7 @@ If this app were to be fleshed out further, I would focus on these areas next:
 **Database**
 
 - Adding an `on_update` trigger to every table that would set the `modified_at` row at the database level instead of at the ORM
+
+**CI/CD**
+
+- Don't run deploy for frontend/backend if pertinent code has not been changed
