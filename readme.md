@@ -73,45 +73,52 @@ Cloud Run was chosen for its simplicity in deploying Docker containers as-is, an
 This project uses **Github Actions** for its Continuous Integration and Deployment. Whenever the code is merged to the repository's `main` branch, the Flask tests run, and when they pass the app automatically deploys the new version to both Cloud Run and Firebase. This is managed by GCP's Workload Identity Federation keyless authentication system, which, though requiring more configuration than traditional secret key methods, is far more secure and extensible once set up.
 
 ## Usage and Screenshots
+<details>
 
-**Staff workflow**
+<summary>Staff Workflow</summary>
 
-1. Login with staff credentials
+**1. Login with staff credentials**
 <img width="915" height="704" alt="image" src="https://github.com/user-attachments/assets/3e34ce51-f635-4212-9e8e-fac686ab837d" />
 
-2. Explore the Dashboard
+**2. Explore the Dashboard**
 <img width="897" height="881" alt="image" src="https://github.com/user-attachments/assets/8786b058-4acb-4373-b114-18721eeb0306" />
 
-3. Investigate Dashboard alerts
+**3. Investigate Dashboard alerts**
 <img width="1067" height="363" alt="image" src="https://github.com/user-attachments/assets/3e4b455f-545f-4bc5-a0f1-0c4466edae34" />
 
-4. Update account Resources
+**4. Update account Resources**
 <img width="1175" height="735" alt="image" src="https://github.com/user-attachments/assets/44029826-ce92-4e3b-964a-1ca84d476585" />
 
-5. Verify alerts are resolved
-<img width="1071" height="258" alt="image" src="https://github.com/user-attachments/assets/23a85859-14d7-4ad4-beb5-c45ca85ac16f" />
+**5. Verify alerts are resolved**
+<img width="1078" height="370" alt="image" src="https://github.com/user-attachments/assets/717af162-04e3-428b-bf7e-1f0b51b0d9a6" />
+</details>
 
+<details
+    
+<Summary>Admin Workflow</Summary>
 
-**Admin Workflow**
-
-1. Login with admin credentials
+**1. Login with admin credentials**\
 <img width="569" height="100" alt="image" src="https://github.com/user-attachments/assets/12535d2f-9eef-4a30-8115-a5eff61b99f4" />
 
-2. Explore the Dashboard, including recent activity
+**2. Explore the Dashboard, including recent activity**
 <img width="1102" height="660" alt="image" src="https://github.com/user-attachments/assets/d6a6f43a-9508-452a-ab16-d7e51a589fda" />
 
-3. Check the platform users
+**3. Check the platform users**
 <img width="1179" height="445" alt="image" src="https://github.com/user-attachments/assets/ef84fe2c-2128-40d1-bde0-d6aa195e710d" />
 
-4. Check the full activity log
+**4. Check the full activity log**
 <img width="1184" height="808" alt="image" src="https://github.com/user-attachments/assets/32eaa707-6d9e-473d-8ffc-cbf5801812ee" />
+</details>
 
-**Reset the app if needed**
+<details>
+    
+<summary>Reset the app if needed</summary>
 
-1. Login as either role
+**1. Login as either role**
 
-2. Press the reset button in the navbar
+**2. Press the reset button in the navbar**\
 <img width="249" height="556" alt="image" src="https://github.com/user-attachments/assets/04e07a9c-8dad-451d-a78a-a82cc2454902" />
+</details>
 
 ## Local Setup
 
