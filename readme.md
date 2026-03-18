@@ -73,12 +73,14 @@ Cloud Run was chosen for its simplicity in deploying Docker containers as-is, an
 This project uses **Github Actions** for its Continuous Integration and Deployment. Whenever the code is merged to the repository's `main` branch, the Flask tests run, and when they pass the app automatically deploys the new version to both Cloud Run and Firebase. This is managed by GCP's Workload Identity Federation keyless authentication system, which, though requiring more configuration than traditional secret key methods, is far more secure and extensible once set up.
 
 ## Usage and Screenshots
-<details>
 
+<img width="807" height="502" alt="image" src="https://github.com/user-attachments/assets/20d6f44d-b501-42fe-8374-3dfbf315a291" />
+
+<details>
 <summary>Staff Workflow</summary>
 
-**1. Login with staff credentials**
-<img width="915" height="704" alt="image" src="https://github.com/user-attachments/assets/3e34ce51-f635-4212-9e8e-fac686ab837d" />
+**1. Login with staff credentials**\
+<img width="593" height="210" alt="image" src="https://github.com/user-attachments/assets/06f155cf-2db1-4e39-a5ed-a8839c75dc1a" />
 
 **2. Explore the Dashboard**
 <img width="897" height="881" alt="image" src="https://github.com/user-attachments/assets/8786b058-4acb-4373-b114-18721eeb0306" />
