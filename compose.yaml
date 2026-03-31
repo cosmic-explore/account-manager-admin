@@ -28,8 +28,6 @@ services:
     image: "postgres:latest"
     env_file:
       - ".env"
-    build:
-      context: ./Database
     ports:
       - '5432:5432'
     volumes:
