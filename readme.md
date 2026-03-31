@@ -1,6 +1,5 @@
-﻿[Live App](https://project-c9459ec0-98ee-427f-866.firebaseapp.com/)
-
 ## Introduction
+﻿[Live App](https://project-c9459ec0-98ee-427f-866.firebaseapp.com/)
 
 Welcome! This repository is a portfolio piece designed to showcase an end-to-end implementation of a SaaS-style web application with a realistic use case: customer account metric-tracking on a platform with admin-oversight.
 
