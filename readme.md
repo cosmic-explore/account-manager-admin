@@ -134,11 +134,12 @@ You must have the following installed:
 
 1. Clone the repo: `git clone https://github.com/cosmic-explore/account-manager-admin.git`
 2. Create environment files and set environment variables (see next section)
-3. Build and start the docker containers: `docker compose up --build`
-4. Seed the database:
+3. Start the Docker Daemon
+4. Build and start the docker containers: `docker compose up --build`
+5. Seed the database:
     1. Access the backend docker container: `docker compose exec -it backend bash`
     2. Run the seeding script: `python reset_db.py`
-5. Access the app at `http://localhost:5173`
+6. Access the app at `http://localhost:5173`
 
 **Environment Variables**
 
