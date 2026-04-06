@@ -1,3 +1,5 @@
+"""Contains a method to run the flask app. This file is intended for development purposes and not used in production"""
+
 import os
 
 from app.factory import create_app

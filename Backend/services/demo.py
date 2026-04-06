@@ -1,3 +1,5 @@
+"""Provides utility methods for resetting the Database to a default state."""
+
 import sqlalchemy as sa
 from datetime import date
 from classes import Person, Account, Resource, Activity
@@ -8,6 +10,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 def clear_tables(db):
+    """Deletes all records from the DB tables used by the app's SQLAlchemy classes."""
     db.session.execute(sa.delete(Activity))
     db.session.execute(sa.delete(Resource))
     db.session.execute(sa.delete(Account))
@@ -16,11 +19,13 @@ def clear_tables(db):
 
 
 def set_create_date(record, date):
+    """Sets the created_at and modified_at fields of a record to the given date."""
     record.created_at = date
     record.modified_at = date
 
 
 def month_minus_n(year, month_num, n):
+    """Returns the month (as an int) that is n months before the given month."""
     # returns the month n months before the given month
     if month_num - n < 1:
         return year - 1, 12 - (n - month_num)
@@ -42,6 +47,7 @@ resource_archtypes = [
 
 
 def seed_tables(db):
+    """Fills the database with default records."""
     password_hasher = Hasher()
 
     test_persons = [
@@ -111,6 +117,7 @@ def seed_tables(db):
 
 
 def reset_db(db):
+    """Clears the database and then reseeds it."""
     clear_tables(db)
     seed_tables(db)
     logging.info("Database has been reset.")

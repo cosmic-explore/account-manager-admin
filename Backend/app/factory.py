@@ -19,6 +19,7 @@ from routes import (
 
 
 def create_app(config_override=None):
+    """Creates and returns a configured flask app object."""
     app = Flask(__name__)
 
     # flask config

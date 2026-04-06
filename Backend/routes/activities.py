@@ -16,5 +16,6 @@ activities_bp = Blueprint("activities", __name__, url_prefix="/activities")
 @login_required
 @admin_required
 def get_activities():
+    """Returns a list of JSON representations of all activities in the DB"""
     activities_list = get_all_activities()
     return jsonify([get_activity_dict(person) for person in activities_list])

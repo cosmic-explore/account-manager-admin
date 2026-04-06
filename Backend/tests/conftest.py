@@ -1,3 +1,5 @@
+"""Defines the app's reusuable fixtures for pytest testing."""
+
 from freezegun import freeze_time
 import pytest
 from sqlalchemy.orm import Session

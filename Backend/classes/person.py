@@ -17,9 +17,11 @@ class Person(UserMixin, db.Model):
 
     @login_manager.user_loader
     def get_by_id(id):
+        """Returns Account object in the DB with given ID, or None if does not exist. This method is required by flask_login"""
         return db.session.scalars(select(Person).where(Person.id == id)).one_or_none()
 
     def get_by_email(email):
+        """Returns Account object in the DB with given email, or None if does not exist"""
         return db.session.scalars(
             select(Person).where(Person.email == email)
         ).one_or_none()

@@ -25,6 +25,7 @@ accounts_bp = Blueprint("accounts", __name__, url_prefix="/accounts")
 @accounts_bp.route("", methods=[HTTP_GET])
 @login_required
 def get_accounts():
+    """Returns list of JSON representations of all accounts in the DB"""
     accounts_list = get_all_accounts()
     return jsonify([get_account_dict(account) for account in accounts_list])
 
@@ -32,6 +33,7 @@ def get_accounts():
 @accounts_bp.route("/<id>/resources", methods=[HTTP_GET])
 @login_required
 def get_account_resources(id):
+    """Returns list of JSON representations of all Resources associated with given account id"""
     resources = get_resources(id)
     account = get_account(id)
     return jsonify(
@@ -46,6 +48,7 @@ def get_account_resources(id):
 @login_required
 @admin_required
 def post_account():
+    """Creates a new account from data provided in request body"""
     request_data = request.get_json()
     new_account = create_account(request_data["name"], request_data["status"])
     return jsonify(get_account_dict(new_account))
@@ -55,6 +58,7 @@ def post_account():
 @login_required
 @admin_required
 def patch_account(id):
+    """Updates account with given id with data in the request body"""
     account = get_account(id)
     update_account(account, request.get_json(), ACCOUNT_MUTABLE_PROPERTIES)
     return jsonify(get_account_dict(account))

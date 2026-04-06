@@ -18,6 +18,7 @@ persons_bp = Blueprint("persons", __name__, url_prefix="/persons")
 @persons_bp.route("/me", methods=[HTTP_GET])
 @login_required
 def get_current_person():
+    """Returns JSON representation of the session's logged-in Person"""
     return jsonify(get_person_dict(current_user))
 
 
@@ -25,6 +26,7 @@ def get_current_person():
 @login_required
 @admin_required
 def get_persons():
+    """Returns list of JSON representations of all Persons in the DB"""
     persons_list = get_all_persons()
     return jsonify([get_person_dict(person) for person in persons_list])
 
@@ -33,6 +35,7 @@ def get_persons():
 @login_required
 @admin_required
 def post_person():
+    """Creates a new Person record using the data in the request body"""
     request_data = request.get_json()
     try:
         create_person(

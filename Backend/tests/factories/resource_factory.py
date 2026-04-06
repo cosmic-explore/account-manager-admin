@@ -4,6 +4,8 @@ from classes.base import db
 
 
 class ResourceFactory(BaseFactory):
+    """Class to create mock Resource objects for testing"""
+
     class Meta:
         model = Resource
         sqlalchemy_session = db.session

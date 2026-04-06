@@ -13,6 +13,8 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 
 @auth_bp.route("/login", methods=[HTTP_POST])
 def login():
+    """Takes email and password from the request data. Returns 204 if already logged in, otherwise
+    validates credentials and logs in."""
     if current_user.is_authenticated:
         logging.info(
             f"REPEATED LOGIN ATTEMPT FOR AUTHENTICATED USER {current_user.email}"
@@ -33,6 +35,7 @@ def login():
 @auth_bp.route("/logout", methods=[HTTP_POST])
 @login_required
 def logout():
+    """Ends the current user's session."""
     logging.info(f"LOGOUT {current_user.email}")
     logout_user()
     return Response(status=204)

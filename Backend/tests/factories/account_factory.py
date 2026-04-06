@@ -4,6 +4,8 @@ from classes.base import db
 
 
 class AccountFactory(BaseFactory):
+    """Class to create mock Account objects for testing"""
+
     class Meta:
         model = Account
         sqlalchemy_session = db.session

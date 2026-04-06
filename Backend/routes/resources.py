@@ -31,7 +31,7 @@ resources_bp = Blueprint("resources", __name__, url_prefix="/resources")
 
 @resources_bp.after_request
 def log_activity_hook(response):
-    """Logs activities on Resource objects"""
+    """A Flask after-request hook to create Activity records when certain Resource routes are called"""
     if not hasattr(g, "activity_action") or not current_user.is_authenticated:
         return response
 
@@ -47,6 +47,9 @@ def log_activity_hook(response):
 
 
 def log_activity(action):
+    """A route decorator that specifies the type of activity that should be logged and saves that
+    data globally for the duration of the request."""
+
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -67,6 +70,7 @@ def log_activity(action):
 @login_required
 @admin_required
 def get_resources():
+    """Returns list of JSON representations of all resources in the DB"""
     resources_list = get_all_resources()
     return jsonify([get_resource_dict(resource) for resource in resources_list])
 
@@ -75,6 +79,7 @@ def get_resources():
 @login_required
 @log_activity(CREATE_RESOURCE)
 def post_resource():
+    """Creates a new resource with the data provided in the request body"""
     request_data = request.get_json()
     new_resource = create_resource(
         request_data["name"],
@@ -93,6 +98,7 @@ def post_resource():
 @login_required
 @log_activity(UPDATE_RESOURCE)
 def patch_resource(id):
+    """Updates resource of the given id with the data from the request body"""
     resource = get_resource(id)
     if resource is None:
         return Response(status=404)

@@ -54,7 +54,7 @@ def get_summary():
 
 
 def get_account_growth():
-    """returns accounts grouped by creation date for the last year"""
+    """Returns accounts grouped by creation date for the last year"""
     new_accounts_by_month = []
 
     def get_accounts_of_prev_month(target_month, target_year, months_back):
@@ -86,7 +86,7 @@ def get_account_growth():
 
 
 def get_resource_distribution():
-    """returns the count of resources by type"""
+    """Returns the count of resources by type"""
     resources = db.session.execute(
         select(Resource.type, func.count(Resource.id).label("count")).group_by(
             Resource.type
@@ -126,7 +126,7 @@ def get_alerts():
 
 
 def get_recent_activity():
-    """returns the 10 most recent activities"""
+    """Returns the 10 most recent activities"""
     recentmost_activities = db.session.scalars(
         select(Activity).order_by(Activity.created_at.desc()).limit(10)
     ).all()

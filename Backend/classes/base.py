@@ -26,12 +26,14 @@ class Base(DeclarativeBase):
 
     @classmethod
     def get_by_id(cls, id):
+        """Returns record from the database with given ID, or None if it does not exist."""
         if isinstance(id, str):
             id = uuid.UUID(id)
         return db.session.scalars(select(cls).where(cls.id == id)).one_or_none()
 
     @classmethod
     def get_all(cls):
+        """Returns all records from the DB of the given class."""
         return db.session.scalars(select(cls)).all()
 
 

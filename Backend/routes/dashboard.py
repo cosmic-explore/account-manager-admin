@@ -21,6 +21,7 @@ dashboard_bp = Blueprint("dashboard", __name__, url_prefix="/dashboard")
 @dashboard_bp.route("", methods=[HTTP_GET])
 @login_required
 def get_dashboard_stats():
+    """Returns the stats displayed by the frontend's dashboard in JSON format"""
     return jsonify(
         {
             "summary": get_summary(),

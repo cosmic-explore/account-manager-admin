@@ -5,6 +5,8 @@ from classes.base import db
 
 
 class BaseFactory(factory.alchemy.SQLAlchemyModelFactory):
+    """Abstract class to create mock objects for testing, inherited by other factory classes"""
+
     class Meta:
         abstract = True
         sqlalchemy_session = db.session
