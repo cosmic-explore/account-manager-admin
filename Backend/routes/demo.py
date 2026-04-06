@@ -1,7 +1,7 @@
 from flask import Blueprint, Response
 from constants import HTTP_POST
 from classes.base import db
-from services.demo import reset_db
+from services.seeding import reset_db
 
 demo_bp = Blueprint("demo", __name__, url_prefix="/demo")
 

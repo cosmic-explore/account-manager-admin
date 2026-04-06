@@ -2,7 +2,7 @@
 
 from app import factory
 from classes.base import db
-from services.demo import reset_db
+from services.seeding import reset_db
 
 app = factory.create_app()
 
