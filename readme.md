@@ -1,4 +1,5 @@
 ## Introduction
+
 ﻿[Live App](https://project-c9459ec0-98ee-427f-866.firebaseapp.com/)
 
 Welcome! This repository is a portfolio piece designed to showcase an end-to-end implementation of a SaaS-style web application with a realistic use case: customer account metric-tracking on a platform with admin-oversight.
@@ -92,6 +93,7 @@ This project uses **Github Actions** for its Continuous Integration and Deployme
 
 **5. Verify alerts are resolved**
 <img width="1078" height="370" alt="image" src="https://github.com/user-attachments/assets/717af162-04e3-428b-bf7e-1f0b51b0d9a6" />
+
 </details>
 
 <details
@@ -109,6 +111,7 @@ This project uses **Github Actions** for its Continuous Integration and Deployme
 
 **4. Check the full activity log**
 <img width="1184" height="808" alt="image" src="https://github.com/user-attachments/assets/32eaa707-6d9e-473d-8ffc-cbf5801812ee" />
+
 </details>
 
 <details>
@@ -119,6 +122,7 @@ This project uses **Github Actions** for its Continuous Integration and Deployme
 
 **2. Press the reset button in the navbar**\
 <img width="249" height="556" alt="image" src="https://github.com/user-attachments/assets/04e07a9c-8dad-451d-a78a-a82cc2454902" />
+
 </details>
 
 ## Local Setup
