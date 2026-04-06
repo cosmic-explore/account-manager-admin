@@ -25,20 +25,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }, [])
 
     const login = async (submittedData: LoginInfo) => {
-        const response = await requestLogin(submittedData)
-        if (response.ok) {
-            const meResponse = await requestMe()
-            if (meResponse.ok) {
-                setUserStatus({ user: await meResponse.json(), loading: false })
+        try {
+            const response = await requestLogin(submittedData)
+            if (response.ok) {
+                const meResponse = await requestMe()
+                if (meResponse.ok) {
+                    setUserStatus({ user: await meResponse.json(), loading: false })
+                } else {
+                    throw new Error(GENERAL_ERROR)
+                }
             } else {
-                throw new Error(GENERAL_ERROR)
+                if (response.status === 401) {
+                    throw new Error(CREDENTIALS_ERROR)
+                } else {
+                    throw new Error(GENERAL_ERROR)
+                }
             }
-        } else {
-            if (response.status === 401) {
-                throw new Error(CREDENTIALS_ERROR)
-            } else {
-                throw new Error(GENERAL_ERROR)
-            }
+        } catch {
+            throw new Error(GENERAL_ERROR)
         }
     }
 
