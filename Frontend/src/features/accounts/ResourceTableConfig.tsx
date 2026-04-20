@@ -1,13 +1,22 @@
-import type { GridColDef, GridPreProcessEditCellProps } from '@mui/x-data-grid'
+import type {
+    GridColDef,
+    GridPreProcessEditCellProps,
+    GridRenderEditCellParams,
+} from '@mui/x-data-grid'
+import { Box } from '@mui/material'
 import { GENERAL_ERROR, STATUS_ENUMS } from '../../constants'
 import type { ResourceInfo } from '../../types/resources'
 
 const dateTimeValueGetter = (dateString: string) => {
     try {
-        return new Date(dateString)
+        return new Date(dateString).toLocaleString()
     } catch {
         return dateString
     }
+}
+
+const DisabledDateEdit = (props: GridRenderEditCellParams) => {
+    return <Box className="nonEditableCell">{dateTimeValueGetter(props.value)}</Box>
 }
 
 export const resourceColumns: GridColDef[] = [
@@ -33,22 +42,22 @@ export const resourceColumns: GridColDef[] = [
             return { ...params.props, error: hasError }
         },
     },
-    {field: 'unit', headerName: 'Unit', editable: true, flex: 3},
+    { field: 'unit', headerName: 'Unit', editable: true, flex: 3 },
     {
         field: 'created',
         headerName: 'Created',
-        type: 'dateTime',
-        editable: false,
+        editable: true,
         flex: 5,
         valueGetter: dateTimeValueGetter,
+        renderEditCell: params => <DisabledDateEdit {...params} />,
     },
     {
         field: 'modified',
         headerName: 'Modified',
-        type: 'dateTime',
-        editable: false,
+        editable: true,
         flex: 5,
         valueGetter: dateTimeValueGetter,
+        renderEditCell: params => <DisabledDateEdit {...params} />,
     },
 ]
 
