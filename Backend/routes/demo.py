@@ -1,6 +1,6 @@
 from flask import Blueprint, Response
 from sqlalchemy import text
-from constants import HTTP_POST
+from constants import HTTP_GET, HTTP_POST
 from classes.base import db
 from services.seeding import reset_db
 
@@ -14,7 +14,7 @@ def reset_demo_database():
     return Response(status=204)
 
 
-@demo_bp.route("/ping", methods=[HTTP_POST])
+@demo_bp.route("/ping", methods=[HTTP_GET])
 def ping_database():
     """Allows the demo database to be pinged to ensure that it's running"""
     # only let the endpoint run if it's using the cron job's secret
