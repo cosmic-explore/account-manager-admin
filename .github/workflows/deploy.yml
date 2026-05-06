@@ -51,7 +51,7 @@ jobs:
             - id: 'deploy-cloud-run'
               name: Deploy Cloud Run
               run: |
-                  gcloud run deploy my-service \
+                  gcloud run deploy account-manager-backend \
                     --project ${{secrets.GCP_PROJECT_ID}} \
                     --image us-central1-docker.pkg.dev/${{secrets.GCP_PROJECT_ID}}/account-manager-backend/account-manager-backend:${{ github.sha }} \
                     --env-vars-file ./.github/workflows/env.yaml \
