@@ -1,0 +1,16 @@
+name: Keep Supabase Alive
+
+on:
+    schedule:
+        - cron: '0 3 */3 * *' # runs every three days
+    workflow_dispatch:
+
+jobs:
+    ping:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Ping Supabase
+              run: |
+                  curl --fail --max-time 10 \
+                  "https://account-manager-backend-167341514847.us-central1.run.app/demo/ping"
