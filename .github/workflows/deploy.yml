@@ -42,18 +42,18 @@ jobs:
             - name: Tag Docker Image
               run: |
                   docker tag onthesafari/account-manager-backend:latest \
-                  us-central1-docker.pkg.dev/${{secrets.GCP_PROJECT_ID}}/account-manager-backend/account-manager-backend:latest
+                  us-central1-docker.pkg.dev/${{secrets.GCP_PROJECT_ID}}/account-manager-backend/account-manager-backend:${{ github.sha }}
 
             - name: Push Docker Image
               run: |
-                  docker push us-central1-docker.pkg.dev/${{secrets.GCP_PROJECT_ID}}/account-manager-backend/account-manager-backend:latest
+                  docker push us-central1-docker.pkg.dev/${{secrets.GCP_PROJECT_ID}}/account-manager-backend/account-manager-backend:${{ github.sha }}
 
             - id: 'deploy-cloud-run'
               name: Deploy Cloud Run
               run: |
                   gcloud run deploy my-service \
                     --project ${{secrets.GCP_PROJECT_ID}} \
-                    --image us-central1-docker.pkg.dev/${{secrets.GCP_PROJECT_ID}}/account-manager-backend/account-manager-backend:latest \
+                    --image us-central1-docker.pkg.dev/${{secrets.GCP_PROJECT_ID}}/account-manager-backend/account-manager-backend:${{ github.sha }} \
                     --env-vars-file ./.github/workflows/env.yaml \
                     --set-secrets ${{secrets.SECRETS_STRING}} \
                     --region us-central1 \
